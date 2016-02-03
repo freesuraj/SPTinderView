@@ -14,6 +14,8 @@
 		ED1F2A201C61D44B0084DD77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED1F2A1E1C61D44B0084DD77 /* LaunchScreen.storyboard */; };
 		ED1F2A2B1C61D44B0084DD77 /* SPTinderViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F2A2A1C61D44B0084DD77 /* SPTinderViewTests.swift */; };
 		ED1F2A361C61D44B0084DD77 /* SPTinderViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F2A351C61D44B0084DD77 /* SPTinderViewUITests.swift */; };
+		ED1F2A451C61D74C0084DD77 /* SPTinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F2A441C61D74C0084DD77 /* SPTinderView.swift */; };
+		ED1F2A491C61E00D0084DD77 /* SPTinderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F2A481C61E00D0084DD77 /* SPTinderViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		ED1F2A311C61D44B0084DD77 /* SPTinderViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SPTinderViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED1F2A351C61D44B0084DD77 /* SPTinderViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPTinderViewUITests.swift; sourceTree = "<group>"; };
 		ED1F2A371C61D44B0084DD77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED1F2A441C61D74C0084DD77 /* SPTinderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPTinderView.swift; sourceTree = "<group>"; };
+		ED1F2A481C61E00D0084DD77 /* SPTinderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPTinderViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 		ED1F2A141C61D44B0084DD77 /* SPTinderView */ = {
 			isa = PBXGroup;
 			children = (
+				ED1F2A431C61D72E0084DD77 /* Source */,
 				ED1F2A151C61D44B0084DD77 /* AppDelegate.swift */,
 				ED1F2A171C61D44B0084DD77 /* ViewController.swift */,
 				ED1F2A191C61D44B0084DD77 /* Main.storyboard */,
@@ -123,6 +128,15 @@
 				ED1F2A371C61D44B0084DD77 /* Info.plist */,
 			);
 			path = SPTinderViewUITests;
+			sourceTree = "<group>";
+		};
+		ED1F2A431C61D72E0084DD77 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				ED1F2A441C61D74C0084DD77 /* SPTinderView.swift */,
+				ED1F2A481C61E00D0084DD77 /* SPTinderViewCell.swift */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,7 +271,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED1F2A181C61D44B0084DD77 /* ViewController.swift in Sources */,
+				ED1F2A491C61E00D0084DD77 /* SPTinderViewCell.swift in Sources */,
 				ED1F2A161C61D44B0084DD77 /* AppDelegate.swift in Sources */,
+				ED1F2A451C61D74C0084DD77 /* SPTinderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

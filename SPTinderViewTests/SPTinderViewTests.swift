@@ -7,7 +7,6 @@
 //
 
 import XCTest
-@testable import SPTinderView
 
 class SPTinderViewTests: XCTestCase {
     
