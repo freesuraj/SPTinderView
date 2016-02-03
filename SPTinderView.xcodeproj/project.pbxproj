@@ -207,6 +207,7 @@
 				TargetAttributes = {
 					ED1F2A111C61D44B0084DD77 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 74HVZ53TRR;
 					};
 					ED1F2A251C61D44B0084DD77 = {
 						CreatedOnToolsVersion = 7.2;
@@ -415,9 +416,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SPTinderView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = sg.com.propertyguru.SPTinderView;
+				PRODUCT_BUNDLE_IDENTIFIER = com.suraj.SPTinderView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -426,9 +428,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SPTinderView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = sg.com.propertyguru.SPTinderView;
+				PRODUCT_BUNDLE_IDENTIFIER = com.suraj.SPTinderView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -500,6 +503,7 @@
 				ED1F2A3C1C61D44B0084DD77 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ED1F2A3D1C61D44B0084DD77 /* Build configuration list for PBXNativeTarget "SPTinderViewTests" */ = {
 			isa = XCConfigurationList;
@@ -508,6 +512,7 @@
 				ED1F2A3F1C61D44B0084DD77 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ED1F2A401C61D44B0084DD77 /* Build configuration list for PBXNativeTarget "SPTinderViewUITests" */ = {
 			isa = XCConfigurationList;
@@ -516,6 +521,7 @@
 				ED1F2A421C61D44B0084DD77 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

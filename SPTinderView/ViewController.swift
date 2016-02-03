@@ -9,10 +9,14 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    @IBOutlet var tinderCell: SPTinderViewCell!
+    @IBOutlet var statusLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        tinderCell.onCellDidMove = { movement in
+            self.statusLabel.text = "\(movement)"
+        }
     }
 
     override func didReceiveMemoryWarning() {
