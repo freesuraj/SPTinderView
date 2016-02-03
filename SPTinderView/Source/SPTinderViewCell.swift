@@ -57,12 +57,15 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
             let deltaY = thisLoc.y - prevLoc.y
             // There's also a little bit of transformation. When the cell is being dragged, it should feel the angle of drag as well
             let xDrift = self.center.x + deltaX - originalCenter.x
+//            let yDrift = self.center.y - originalCenter.y
             let rotationAngle = xDrift * -0.05 * CGFloat(M_PI / 90)
-            UIView.animateWithDuration(0.00, animations: {
+            // Note: Must set the animation option to `AllowUserInteraction` to prevent the main thread being blocked while animation is ongoin
+            UIView.animateWithDuration(0.0, delay: 0.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
                 self.transform = CGAffineTransformMakeRotation(rotationAngle)
                 self.center.x += deltaX
                 self.center.y += deltaY
                 }, completion: { finished in
+//                    self.setCellMovementDirectionFromDrift(xDrift, yDrift: yDrift)
             })
         }
     }
@@ -70,7 +73,7 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
     public override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let xDrift = self.center.x - originalCenter.x
         let yDrift = self.center.y - originalCenter.y
-        UIView.animateWithDuration(0.2, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
+        UIView.animateWithDuration(0.2, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
                 self.center = self.originalCenter
                 self.transform = CGAffineTransformIdentity
             }, completion: { finished in
@@ -79,7 +82,11 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
     }
     
     public override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        //
+        UIView.animateWithDuration(0.2, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
+            self.center = self.originalCenter
+            self.transform = CGAffineTransformIdentity
+            }, completion: { finished in
+        })
     }
     
     public override func touchesEstimatedPropertiesUpdated(touches: Set<NSObject>) {
