@@ -15,7 +15,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tinderCell.onCellDidMove = { movement in
-            self.statusLabel.text = "\(movement)"
+            switch (movement) {
+            case .Top:
+                self.tinderCell.backgroundColor = UIColor.redColor()
+            case .Bottom:
+                self.tinderCell.backgroundColor = UIColor.magentaColor()
+            case .Left:
+                self.tinderCell.backgroundColor = UIColor.greenColor()
+            case .Right:
+                self.tinderCell.backgroundColor = UIColor.blueColor()
+            default:
+                self.tinderCell.backgroundColor = UIColor.purpleColor()
+            }
         }
     }
 

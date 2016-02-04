@@ -38,9 +38,14 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
     
     var originalCenter = CGPoint(x: 0, y: 0)
     
+    public override func awakeFromNib() {
+        self.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+    }
+    
     convenience init(frame: CGRect, reuseIdentifier: String?) {
         self.init(frame: frame)
         self.reuseIdentifier = reuseIdentifier
+        self.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
     }
     
     public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -57,27 +62,26 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
             let deltaY = thisLoc.y - prevLoc.y
             // There's also a little bit of transformation. When the cell is being dragged, it should feel the angle of drag as well
             let xDrift = self.center.x + deltaX - originalCenter.x
-//            let yDrift = self.center.y - originalCenter.y
+            let yDrift = self.center.y - originalCenter.y
+            
             let rotationAngle = xDrift * -0.05 * CGFloat(M_PI / 90)
+            
             // Note: Must set the animation option to `AllowUserInteraction` to prevent the main thread being blocked while animation is ongoin
             UIView.animateWithDuration(0.0, delay: 0.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
                 self.transform = CGAffineTransformMakeRotation(rotationAngle)
                 self.center.x += deltaX
                 self.center.y += deltaY
+                self.setCellMovementDirectionFromDrift(xDrift, yDrift: yDrift)
                 }, completion: { finished in
-//                    self.setCellMovementDirectionFromDrift(xDrift, yDrift: yDrift)
             })
         }
     }
     
     public override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let xDrift = self.center.x - originalCenter.x
-        let yDrift = self.center.y - originalCenter.y
-        UIView.animateWithDuration(0.2, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
+        UIView.animateWithDuration(0.2, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1, options: [.AllowUserInteraction], animations: {
                 self.center = self.originalCenter
                 self.transform = CGAffineTransformIdentity
             }, completion: { finished in
-                self.setCellMovementDirectionFromDrift(xDrift, yDrift: yDrift)
         })
     }
     
@@ -95,18 +99,17 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
     
     func setCellMovementDirectionFromDrift(xDrift: CGFloat, yDrift: CGFloat){
         var movement: SPTinderViewCellMovement = .None
-        if(xDrift > self.frame.width) { movement = .Right }
-        else if(-xDrift > self.frame.width) { movement = .Left }
-        else if(-yDrift > self.frame.height) { movement = .Top }
-        else if(yDrift > self.frame.height) { movement = .Bottom }
+        if(xDrift > self.frame.width/2) { movement = .Right }
+        else if(-xDrift > self.frame.width/2) { movement = .Left }
+        else if(-yDrift > self.frame.height/2) { movement = .Top }
+        else if(yDrift > self.frame.height/2) { movement = .Bottom }
         else { movement = .None }
         if movement != self.cellMovement {
             self.cellMovement = movement
+            if let cellMoveBlock = onCellDidMove {
+                cellMoveBlock(movement)
+            }
             print("\(movement)")
-        }
-        
-        if let cellMoveBlock = onCellDidMove {
-            cellMoveBlock(movement)
         }
     }
 }
