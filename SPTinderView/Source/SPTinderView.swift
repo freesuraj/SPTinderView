@@ -30,7 +30,12 @@ public class SPTinderView: UIView {
     // Cache
     private var cache: NSCache = NSCache()
     
-    var dataSource: SPTinderViewDataSource?
+    var dataSource: SPTinderViewDataSource? {
+        didSet {
+            
+        }
+    }
+    
     var delegate: SPTinderViewDelegate?
     var currentIndex: Int = 0
     
@@ -55,29 +60,12 @@ public class SPTinderView: UIView {
         
     }
     
-    public func registerNib(nib: UINib?, forCellReuseIdentifier identifier: String) {
-        guard let _nib = nib else { return }
-        if let cell = _nib.instantiateWithOwner(self, options: nil).first as? SPTinderViewCell {
-            cache.setObject(cell, forKey: identifier)
-        }
-    }
-
-    public func registerClass(cellClass: AnyClass?, forCellReuseIdentifier identifier: String) {
-        if let cell = cellClass where cell is SPTinderViewCell.Type {
-            cache.setObject(cell, forKey: identifier)
-        }
-    }
-    
-    public func dequeueReusableCellWithIdentifier(identifier: String) -> SPTinderViewCell? {
-        return cache.objectForKey(identifier) as? SPTinderViewCell
-    }
-    
     private func setUpFirstSetOfCells() {
-        guard let dataSource_ = dataSource else { return }
-        let count = dataSource_.numberOfItemsInTinderView(self)
-        let visibleCount = dataSource_.numberOfVisibleCellsInTinderView(self)
+        guard let _dataSource = dataSource else { return }
+        let count = _dataSource.numberOfItemsInTinderView(self)
+        let visibleCount = _dataSource.numberOfVisibleCellsInTinderView(self)
         for var index = currentIndex; index < min(visibleCount, count - index); index++ {
-            if let cell = dataSource_.tinderView(self, cellAtIndex: index) {
+            if let cell = _dataSource.tinderView(self, cellAtIndex: index) {
                 self.insertSubview(cell, atIndex: 0)
                 cell.center = positionForCellAtIndex(index)
             }
@@ -102,34 +90,32 @@ public class SPTinderView: UIView {
                 cell.removeFromSuperview()
         })
     }
-}
-
-private struct SPCache: CustomStringConvertible {
     
-    private var cache: NSCache = NSCache()
+    // MARK: Cache and Recycle
+    private func setUpCache() {
+        guard let _dataSource = dataSource else { return }
+        let count = _dataSource.numberOfVisibleCellsInTinderView(self)
+        print("\(count)")
+    }
     
-    mutating func cacheView(view: UIView, atIndexPath indexPath: NSIndexPath) {
-        if let _ = cache.objectForKey(indexPath.stringKey) {
-            return
+    private func recycleCell(cell: SPTinderViewCell) {
+        
+    }
+    
+    public func registerNib(nib: UINib?, forCellReuseIdentifier identifier: String) {
+        guard let _nib = nib else { return }
+        if let cell = _nib.instantiateWithOwner(self, options: nil).first as? SPTinderViewCell {
+            cache.setObject(cell, forKey: identifier)
         }
-        cache.setObject(view, forKey: indexPath.stringKey)
     }
     
-    mutating func removeCachedViewAtIndexPath(atIndexPath indexPath: NSIndexPath) {
-        cache.removeObjectForKey(indexPath.stringKey)
+    public func registerClass(cellClass: AnyClass?, forCellReuseIdentifier identifier: String) {
+        if let cell = cellClass where cell is SPTinderViewCell.Type {
+            cache.setObject(cell, forKey: identifier)
+        }
     }
     
-    func cachedView(atIndexPath indexPath: NSIndexPath) -> UIView? {
-        return cache.objectForKey(indexPath.stringKey) as? UIView
-    }
-    
-    var description: String {
-        return "PGViewCache- \(cache.name)"
-    }
-}
-
-extension NSIndexPath {
-    private var stringKey: String {
-        return String("\(self.section)-\(self.row)")
+    public func dequeueReusableCellWithIdentifier(identifier: String) -> SPTinderViewCell? {
+        return cache.objectForKey(identifier) as? SPTinderViewCell
     }
 }
