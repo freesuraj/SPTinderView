@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -18,77 +19,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ShU-3A-KMC" customClass="SPTinderViewCell" customModule="SPTinderView" customModuleProvider="target">
-                                <rect key="frame" x="200" y="200" width="200" height="200"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I am a text!!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nF-H5-TVq">
-                                        <rect key="frame" x="0.0" y="90" width="200" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="2pa-VF-y3O"/>
-                                            <constraint firstAttribute="width" constant="200" id="zud-0P-eAW"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <color key="textColor" red="0.81568627449999997" green="0.10980392160000001" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.59999999999999998" green="1" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="3nF-H5-TVq" firstAttribute="centerY" secondItem="ShU-3A-KMC" secondAttribute="centerY" id="1hZ-hJ-xhp"/>
-                                    <constraint firstAttribute="height" constant="200" id="AHI-RB-Byc"/>
-                                    <constraint firstAttribute="width" constant="200" id="CjM-jd-1ul"/>
-                                    <constraint firstItem="3nF-H5-TVq" firstAttribute="centerX" secondItem="ShU-3A-KMC" secondAttribute="centerX" id="EKZ-QO-8vR"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.56862747669219971" green="0.12941177189350128" blue="0.20784313976764679" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="reuseIdentifier" value="My Custom Cell"/>
-                                </userDefinedRuntimeAttributes>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yXg-y3-tRm" customClass="SPTinderView" customModule="SPTinderView" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ys-Oj-e0y">
-                                <rect key="frame" x="0.0" y="420" width="600" height="1"/>
-                                <color key="backgroundColor" red="0.1960784314" green="0.3921568627" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="8jr-gS-2sW"/>
-                                </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DcY-Ez-Wsd">
-                                <rect key="frame" x="200" y="45" width="200" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="8c1-65-8Mw"/>
-                                    <constraint firstAttribute="height" constant="21" id="SKj-FD-lUp"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="DcY-Ez-Wsd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2JB-Fp-tCW"/>
-                            <constraint firstItem="ShU-3A-KMC" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="6DP-TV-vwr"/>
-                            <constraint firstItem="ShU-3A-KMC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9HN-34-8b7"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8Ys-Oj-e0y" secondAttribute="bottom" constant="179" id="G5z-1f-PgW"/>
-                            <constraint firstItem="8Ys-Oj-e0y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="bZq-bV-ZpC"/>
-                            <constraint firstItem="DcY-Ez-Wsd" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="25" id="fpw-kQ-nhk"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="8Ys-Oj-e0y" secondAttribute="trailing" constant="-20" id="xqi-KI-FEZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="yXg-y3-tRm" secondAttribute="trailing" constant="-20" id="0zI-dD-Zpy"/>
+                            <constraint firstItem="yXg-y3-tRm" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="Jh6-qJ-Bgu"/>
+                            <constraint firstItem="yXg-y3-tRm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="ubN-Za-Kgg"/>
+                            <constraint firstItem="yXg-y3-tRm" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="zQ3-uY-tpM"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="statusLabel" destination="DcY-Ez-Wsd" id="6q3-qw-661"/>
-                        <outlet property="tinderCell" destination="ShU-3A-KMC" id="sEr-jg-YqV"/>
+                        <outlet property="tinderView" destination="yXg-y3-tRm" id="oMf-D6-Dji"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="278" y="327"/>
+            <point key="canvasLocation" x="462" y="329"/>
         </scene>
     </scenes>
 </document>

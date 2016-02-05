@@ -8,9 +8,7 @@
 
 import UIKit
 
-/**
- *  The SPTinderViewCell defines the attributes and behavior of the cells that appear in SPTinderView objects. This class includes properties and methods for setting and managing cell content and background.
- */
+ /// The SPTinderViewCell defines the attributes and behavior of the cells that appear in SPTinderView objects. This class includes properties and methods for setting and managing cell content and background.
 
 @IBDesignable
 public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
@@ -45,7 +43,14 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
     convenience init(frame: CGRect, reuseIdentifier: String?) {
         self.init(frame: frame)
         self.reuseIdentifier = reuseIdentifier
-        self.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+    }
+    
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
     public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
