@@ -16,6 +16,7 @@
 		ED1F2A361C61D44B0084DD77 /* SPTinderViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F2A351C61D44B0084DD77 /* SPTinderViewUITests.swift */; };
 		ED1F2A451C61D74C0084DD77 /* SPTinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F2A441C61D74C0084DD77 /* SPTinderView.swift */; };
 		ED1F2A491C61E00D0084DD77 /* SPTinderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F2A481C61E00D0084DD77 /* SPTinderViewCell.swift */; };
+		EDA3B6CF1C66430A007F4ECD /* MyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3B6CE1C66430A007F4ECD /* MyTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		ED1F2A371C61D44B0084DD77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED1F2A441C61D74C0084DD77 /* SPTinderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPTinderView.swift; sourceTree = "<group>"; };
 		ED1F2A481C61E00D0084DD77 /* SPTinderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPTinderViewCell.swift; sourceTree = "<group>"; };
+		EDA3B6CE1C66430A007F4ECD /* MyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				ED1F2A431C61D72E0084DD77 /* Source */,
 				ED1F2A151C61D44B0084DD77 /* AppDelegate.swift */,
 				ED1F2A171C61D44B0084DD77 /* ViewController.swift */,
+				EDA3B6CE1C66430A007F4ECD /* MyTableViewController.swift */,
 				ED1F2A191C61D44B0084DD77 /* Main.storyboard */,
 				ED1F2A1C1C61D44B0084DD77 /* Assets.xcassets */,
 				ED1F2A1E1C61D44B0084DD77 /* LaunchScreen.storyboard */,
@@ -274,6 +277,7 @@
 				ED1F2A181C61D44B0084DD77 /* ViewController.swift in Sources */,
 				ED1F2A491C61E00D0084DD77 /* SPTinderViewCell.swift in Sources */,
 				ED1F2A161C61D44B0084DD77 /* AppDelegate.swift in Sources */,
+				EDA3B6CF1C66430A007F4ECD /* MyTableViewController.swift in Sources */,
 				ED1F2A451C61D74C0084DD77 /* SPTinderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

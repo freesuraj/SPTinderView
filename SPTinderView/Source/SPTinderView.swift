@@ -24,58 +24,94 @@ public protocol SPTinderViewDelegate {
 public class SPTinderView: UIView {
     
     // Cache
-    private var caches: [SPCache]?
+    private var caches: [SPCache] = []
     
     var dataSource: SPTinderViewDataSource? {
         didSet {
-            
+            self.reloadData()
         }
     }
     
     var delegate: SPTinderViewDelegate?
     var currentIndex: Int = 0
     private let visibleCount = 3
+    
+    // MARK: Initialization
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        setUpFirstSetOfCells()
+        reloadData()
     }
 
     public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        reloadData()
     }
     
     public override func awakeFromNib() {
-        setUpFirstSetOfCells()
+        reloadData()
     }
     
     public override func layoutSubviews() {
-        
-    }
-    
-    public func reloadData() {
-        
+        super.layoutSubviews()
     }
     
     private func setUpFirstSetOfCells() {
         guard let _dataSource = dataSource else { return }
         let count = _dataSource.numberOfItemsInTinderView(self)
         for var index = currentIndex; index < min(visibleCount, count - index); index++ {
-            if let cell = _dataSource.tinderView(self, cellAt: index) {
-                self.insertSubview(cell, atIndex: 0)
-                cell.center = positionForCellAtIndex(index)
+            insertCell(at: index)
+        }
+    }
+    
+    private func cleanTinderView() {
+        for cell in visibleCells() {
+            cell.removeFromSuperview()
+        }
+    }
+    
+    private func visibleCells() -> [SPTinderViewCell] {
+        var cells: [SPTinderViewCell] = []
+        for aView in self.subviews {
+            if let cell = aView as? SPTinderViewCell {
+                cells.append(cell)
             }
+        }
+        return cells
+    }
+    
+    private func insertCell(at index: Int) {
+        guard let _dataSource = dataSource else { return }
+        if let cell = _dataSource.tinderView(self, cellAt: index) {
+            cell.onCellDidMove = { direction in
+                if let _delegate = self.delegate {
+                    _delegate.tinderView(self, didMoveCellAt: index, towards: direction)
+                }
+                if direction != .None {
+                    self.animateRemovalForCell(cell)
+                }
+            }
+            self.insertSubview(cell, atIndex: 0)
+            self.sendSubviewToBack(cell)
+            UIView.animateWithDuration(0.1, animations: {
+              cell.center = self.positionForCellAtIndex(index)
+                }, completion:  { f in
+                    print("inserted cell frame \(cell.frame)")
+            })
         }
     }
     
     private func positionForCellAtIndex(index: Int) -> CGPoint {
         var _center = center
-        _center.y = center.y + CGFloat((index - currentIndex) * 2)
-        
+        _center.y = center.y + CGFloat((index - currentIndex) * 5)
         return _center
     }
     
-    private func animateCellReposition() {
-        
+    private func adjustVisibleCellPosition() {
+        UIView.animateWithDuration(0.2, animations: {
+            for (position, cell) in self.visibleCells().enumerate() {
+                cell.center.y = self.center.y + CGFloat(position * 5)
+            }
+        })
     }
     
     private func animateRemovalForCell(cell: SPTinderViewCell) {
@@ -83,24 +119,21 @@ public class SPTinderView: UIView {
             cell.alpha = 0.0
             }, completion: { finished in
                 cell.removeFromSuperview()
+                self.recycleACell(cell)
+                self.insertCell(at: self.currentIndex + self.visibleCount)
+                self.currentIndex += 1
+                self.adjustVisibleCellPosition()
         })
     }
     
-    // MARK: Cache and Recycle
-    private func setUpCache() {
-//        guard let _dataSource = dataSource else { return }
-        print("\(visibleCount)")
-    }
-    
-    private func recycleCell(cell: SPTinderViewCell) {
-        
-    }
-    
+    // MARK: Public Method
     public func registerNib(nib: UINib?, forCellReuseIdentifier identifier: String) {
-//        guard let _nib = nib else { return }
-//        if let cell = _nib.instantiateWithOwner(self, options: nil).first as? SPTinderViewCell {
-////            cache.setObject(cell, forKey: identifier)
-//        }
+        guard let _nib = nib else { return }
+        for _ in 0...visibleCount {
+            if let cell = _nib.instantiateWithOwner(self, options: nil).first as? SPTinderViewCell {
+                registerACell(cell, forIdentifier: identifier)
+            }
+        }
     }
     /**
      Register a new cell class for a given identifier. The cell must conform to `SPTinderViewCell` to be a valid cell. The registered cells will be cached which can be retrieved usign ``dequeueReusableCellWithIdentifier: `` method
@@ -111,8 +144,10 @@ public class SPTinderView: UIView {
      - parameter identifier: identifier that ties the cellClass onto SPTinderView
      */
     public func registerClass(cellClass: AnyClass?, forCellReuseIdentifier identifier: String) {
-        if let cell = cellClass where cell is SPTinderViewCell.Type {
-//            cache.setObject(cell, forKey: identifier)
+        if let cell = cellClass as? SPTinderViewCell.Type {
+            for _ in 0...visibleCount {
+                registerACell(cell.init(reuseIdentifier: identifier), forIdentifier: identifier)
+            }
         }
     }
     
@@ -124,45 +159,87 @@ public class SPTinderView: UIView {
     - returns: `SPTinderViewCell` if cell exists in cache or a nil
      */
     public func dequeueReusableCellWithIdentifier(identifier: String) -> SPTinderViewCell? {
-//        return cache.objectForKey(identifier) as? SPTinderViewCell
+        let cell = self.getAFreeCellForIdentifier(identifier)
+        print("dequeued cell is \(cell)")
+        return cell
+    }
+    
+    public func reloadData() {
+        cleanTinderView()
+        setUpFirstSetOfCells()
+    }
+    
+    // MARK: Cache Management
+    private func getAFreeCellForIdentifier(identifier: String) -> SPTinderViewCell? {
+        for cache in caches {
+            if cache.identifier == identifier {
+                return cache.getAFreeCell()
+            }
+        }
         return nil
+    }
+    
+    private func registerACell(cell: SPTinderViewCell, forIdentifier identifier: String) {
+        for cache in caches {
+            if cache.identifier == identifier {
+                cache.recycleACell(cell)
+                return
+            }
+        }
+        let cache = SPCache(_identifier: identifier)
+        cache.recycleACell(cell)
+        caches.append(cache)
+    }
+    
+    private func recycleACell(cell: SPTinderViewCell) {
+        for cache in caches {
+            if cache.identifier == cell.reuseIdentifier {
+                cache.recycleACell(cell)
+                return
+            }
+        }
     }
 }
 
-class SPCache: NSObject {
-    var identifier: String?
+/// SPCache class manages the cell cache for SPTinderView
+private class SPCache {
+    var identifier: String
     var cachedCells: [CachedCell] = []
     
-    convenience init(_identifier: String) {
-        self.init()
+    required init(_identifier: String) {
         identifier = _identifier
     }
     
     func recycleACell(cell: SPTinderViewCell) {
         for cachedCell in cachedCells {
-            if let ccell = cachedCell.cell where ccell == cell {
+            if cachedCell.cell == cell {
                 cachedCell.isFree = true
                 break
             }
         }
-        let cachedCell = CachedCell()
-        cachedCell.cell = cell
-        cachedCell.isFree = true
+        let cachedCell = CachedCell(_cell: cell)
+        cachedCells.append(cachedCell)
     }
     
     func getAFreeCell() -> SPTinderViewCell? {
         for cachedCell in cachedCells {
             if cachedCell.isFree {
-                if let tinderCell = cachedCell.cell {
-                    return tinderCell
-                }
+                cachedCell.isFree = false
+                cachedCell.cell.alpha = 1.0
+                cachedCell.cell.transform = CGAffineTransformIdentity
+                return cachedCell.cell
             }
         }
         return nil
     }
 }
 
-class CachedCell {
-    var cell: SPTinderViewCell?
+private class CachedCell {
+    var cell: SPTinderViewCell
     var isFree: Bool = true
+    
+    required init(_cell: SPTinderViewCell) {
+        cell = _cell
+        isFree = true
+    }
 }

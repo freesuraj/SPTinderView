@@ -40,8 +40,8 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
         self.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
     }
     
-    convenience init(frame: CGRect, reuseIdentifier: String?) {
-        self.init(frame: frame)
+    public required init(reuseIdentifier: String) {
+        self.init()
         self.reuseIdentifier = reuseIdentifier
     }
     

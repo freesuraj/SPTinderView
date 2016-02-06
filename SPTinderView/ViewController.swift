@@ -13,29 +13,33 @@ class MyTinderCell: SPTinderViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.getRandomColor()
-        self.borderColor = UIColor.blueColor()
-        titleLabel.frame = frame
-        titleLabel.textAlignment = .Center
-        self.addSubview(titleLabel)
-        self.borderWidth = 2.0
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+
+    required init(reuseIdentifier: String) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        self.frame = CGRect(origin: CGPointZero, size: CGSize(width: 200, height: 200))
+        self.backgroundColor = UIColor.getRandomColor()
+        self.borderColor = UIColor.lightGrayColor()
+        self.cornerRadius = 3.0
+        titleLabel.frame = self.frame
+        titleLabel.textAlignment = .Center
+        self.addSubview(titleLabel)
+        self.borderWidth = 1.0
+    }
 }
 
 class ViewController: UIViewController {
-    @IBOutlet var tinderCell: SPTinderViewCell!
-    @IBOutlet var statusLabel: UILabel!
     @IBOutlet var tinderView: SPTinderView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tinderView.registerClass(MyTinderCell.self, forCellReuseIdentifier: "MyTinderCell")
         tinderView.dataSource = self
         tinderView.delegate = self
-        tinderView.registerClass(MyTinderCell.self, forCellReuseIdentifier: "MyTinderCell")
     }
 
     override func didReceiveMemoryWarning() {
