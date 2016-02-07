@@ -87,16 +87,12 @@ public class SPTinderView: UIView {
                     _delegate.tinderView(self, didMoveCellAt: index, towards: direction)
                 }
                 if direction != .None {
-                    self.animateRemovalForCell(cell)
+                    self.animateRemovalForCell(cell, towards: direction)
                 }
             }
             self.insertSubview(cell, atIndex: 0)
             self.sendSubviewToBack(cell)
-            UIView.animateWithDuration(0.1, animations: {
-              cell.center = self.positionForCellAtIndex(index)
-                }, completion:  { f in
-                    print("inserted cell frame \(cell.frame)")
-            })
+            cell.center = self.positionForCellAtIndex(index)
         }
     }
     
@@ -107,16 +103,26 @@ public class SPTinderView: UIView {
     }
     
     private func adjustVisibleCellPosition() {
-        UIView.animateWithDuration(0.2, animations: {
+        print("frame size \(self.frame), center: \(self.center)")
+        
+        UIView.animateWithDuration(0.1, animations: {
             for (position, cell) in self.visibleCells().enumerate() {
-                cell.center.y = self.center.y + CGFloat(position * 5)
+                cell.center.y = self.center.y - CGFloat(position * 5)
             }
         })
     }
     
-    private func animateRemovalForCell(cell: SPTinderViewCell) {
-        UIView.animateWithDuration(0.2, animations: {
-            cell.alpha = 0.0
+    private func animateRemovalForCell(cell: SPTinderViewCell, towards direction: SPTinderViewCellMovement) {
+        var newPosition = CGPointZero
+        switch direction {
+        case .None: return
+        case .Left: newPosition = CGPoint(x: -2*cell.frame.width, y: cell.center.y)
+        case .Right: newPosition = CGPoint(x: 2*cell.frame.width, y: cell.center.y)
+        case .Top: newPosition = CGPoint(x: cell.center.x, y: -2*cell.frame.height)
+        case .Bottom: newPosition = CGPoint(x: cell.center.x, y: 2*cell.frame.height)
+        }
+        UIView.animateWithDuration(0.3, animations: {
+            cell.center = newPosition
             }, completion: { finished in
                 cell.removeFromSuperview()
                 self.recycleACell(cell)
@@ -160,7 +166,6 @@ public class SPTinderView: UIView {
      */
     public func dequeueReusableCellWithIdentifier(identifier: String) -> SPTinderViewCell? {
         let cell = self.getAFreeCellForIdentifier(identifier)
-        print("dequeued cell is \(cell)")
         return cell
     }
     

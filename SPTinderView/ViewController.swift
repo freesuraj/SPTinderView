@@ -21,10 +21,10 @@ class MyTinderCell: SPTinderViewCell {
 
     required init(reuseIdentifier: String) {
         super.init(reuseIdentifier: reuseIdentifier)
-        self.frame = CGRect(origin: CGPointZero, size: CGSize(width: 200, height: 200))
+        self.frame = CGRect(origin: CGPointZero, size: CGSize(width: 320, height: 400))
         self.backgroundColor = UIColor.getRandomColor()
         self.borderColor = UIColor.lightGrayColor()
-        self.cornerRadius = 3.0
+        self.cornerRadius = 6.0
         titleLabel.frame = self.frame
         titleLabel.textAlignment = .Center
         self.addSubview(titleLabel)
@@ -37,9 +37,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tinderView.frame = self.view.frame
         tinderView.registerClass(MyTinderCell.self, forCellReuseIdentifier: "MyTinderCell")
         tinderView.dataSource = self
         tinderView.delegate = self
+        print("tv frame size \(self.tinderView.frame), this view: \(self.view.frame)")
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,6 +57,7 @@ extension ViewController: SPTinderViewDataSource, SPTinderViewDelegate {
     func tinderView(view: SPTinderView, cellAt index: Int) -> SPTinderViewCell? {
         if let cell = tinderView.dequeueReusableCellWithIdentifier("MyTinderCell") as? MyTinderCell {
             cell.titleLabel.text = "\(index)"
+            cell.backgroundColor = UIColor.getRandomColor()
             return cell
         }
         return nil

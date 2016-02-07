@@ -26,6 +26,11 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
     @IBInspectable var borderColor: UIColor? {
         didSet {
             layer.borderColor = borderColor?.CGColor
+            // Add a drop shadow
+            self.layer.shadowColor = UIColor.darkGrayColor().CGColor
+            self.layer.shadowOffset = CGSizeMake(0, 5)
+            self.layer.masksToBounds = false
+            self.layer.shadowOpacity = 0.5
         }
     }
     
@@ -34,8 +39,8 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
     typealias cellMovementChange = (SPTinderViewCellMovement) -> ()
     var onCellDidMove: cellMovementChange?
     
-    var originalCenter = CGPoint(x: 0, y: 0)
-    
+    private var originalCenter = CGPoint(x: 0, y: 0)
+    private var scaleToRemoveCell: CGFloat = 0.3
     public override func awakeFromNib() {
         self.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
     }
@@ -67,8 +72,6 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
             let deltaY = thisLoc.y - prevLoc.y
             // There's also a little bit of transformation. When the cell is being dragged, it should feel the angle of drag as well
             let xDrift = self.center.x + deltaX - originalCenter.x
-            let yDrift = self.center.y - originalCenter.y
-            
             let rotationAngle = xDrift * -0.05 * CGFloat(M_PI / 90)
             
             // Note: Must set the animation option to `AllowUserInteraction` to prevent the main thread being blocked while animation is ongoin
@@ -76,18 +79,15 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
                 self.transform = CGAffineTransformMakeRotation(rotationAngle)
                 self.center.x += deltaX
                 self.center.y += deltaY
-                self.setCellMovementDirectionFromDrift(xDrift, yDrift: yDrift)
                 }, completion: { finished in
             })
         }
     }
     
     public override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        UIView.animateWithDuration(0.2, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1, options: [.AllowUserInteraction], animations: {
-                self.center = self.originalCenter
-                self.transform = CGAffineTransformIdentity
-            }, completion: { finished in
-        })
+        let xDrift = self.center.x - originalCenter.x
+        let yDrift = self.center.y - originalCenter.y
+        self.setCellMovementDirectionFromDrift(xDrift, yDrift: yDrift)
     }
     
     public override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
@@ -104,17 +104,21 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
     
     func setCellMovementDirectionFromDrift(xDrift: CGFloat, yDrift: CGFloat){
         var movement: SPTinderViewCellMovement = .None
-        if(xDrift > self.frame.width/2) { movement = .Right }
-        else if(-xDrift > self.frame.width/2) { movement = .Left }
-        else if(-yDrift > self.frame.height/2) { movement = .Top }
-        else if(yDrift > self.frame.height/2) { movement = .Bottom }
+        if(xDrift > self.frame.width * scaleToRemoveCell) { movement = .Right }
+        else if(-xDrift > self.frame.width * scaleToRemoveCell) { movement = .Left }
+        else if(-yDrift > self.frame.height * scaleToRemoveCell) { movement = .Top }
+        else if(yDrift > self.frame.height * scaleToRemoveCell) { movement = .Bottom }
         else { movement = .None }
-        if movement != self.cellMovement {
+        if movement != .None  {
             self.cellMovement = movement
             if let cellMoveBlock = onCellDidMove {
                 cellMoveBlock(movement)
             }
-            print("\(movement)")
+        } else {
+            UIView.animateWithDuration(0.5, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [.AllowUserInteraction], animations: {
+                self.center = self.originalCenter
+                self.transform = CGAffineTransformIdentity
+                }, completion: nil)
         }
     }
 }

@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -20,17 +19,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yXg-y3-tRm" customClass="SPTinderView" customModule="SPTinderView" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="yXg-y3-tRm" secondAttribute="trailing" constant="-20" id="0zI-dD-Zpy"/>
-                            <constraint firstItem="yXg-y3-tRm" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="Jh6-qJ-Bgu"/>
-                            <constraint firstItem="yXg-y3-tRm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="ubN-Za-Kgg"/>
+                            <constraint firstItem="yXg-y3-tRm" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Dpo-PQ-xf3"/>
+                            <constraint firstItem="yXg-y3-tRm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SeW-x2-ZGW"/>
+                            <constraint firstItem="yXg-y3-tRm" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ryP-iw-ktq"/>
+                            <constraint firstItem="yXg-y3-tRm" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="tgL-Lo-XQK"/>
                             <constraint firstItem="yXg-y3-tRm" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="zQ3-uY-tpM"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="zQ3-uY-tpM"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="tinderView" destination="yXg-y3-tRm" id="oMf-D6-Dji"/>
