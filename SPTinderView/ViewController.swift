@@ -38,7 +38,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tinderView.frame = self.view.frame
-        tinderView.registerClass(MyTinderCell.self, forCellReuseIdentifier: "MyTinderCell")
+//        tinderView.registerClass(MyTinderCell.self, forCellReuseIdentifier: "MyTinderCell")
+        tinderView.registerNib(UINib(nibName: "MyCustomTinderCell", bundle: nil), forCellReuseIdentifier: "MyCustomTinderCell")
         tinderView.dataSource = self
         tinderView.delegate = self
         print("tv frame size \(self.tinderView.frame), this view: \(self.view.frame)")
@@ -55,9 +56,8 @@ extension ViewController: SPTinderViewDataSource, SPTinderViewDelegate {
     }
     
     func tinderView(view: SPTinderView, cellAt index: Int) -> SPTinderViewCell? {
-        if let cell = tinderView.dequeueReusableCellWithIdentifier("MyTinderCell") as? MyTinderCell {
-            cell.titleLabel.text = "\(index)"
-            cell.backgroundColor = UIColor.getRandomColor()
+        if let cell = tinderView.dequeueReusableCellWithIdentifier("MyCustomTinderCell") as? MyCustomTinderCell {
+            cell.imageView.image = randomImage()
             return cell
         }
         return nil
@@ -65,6 +65,11 @@ extension ViewController: SPTinderViewDataSource, SPTinderViewDelegate {
     
     func tinderView(view: SPTinderView, didMoveCellAt index: Int, towards direction: SPTinderViewCellMovement) {
         print("\(direction)")
+    }
+    
+    func randomImage() -> UIImage? {
+        let number = Int(arc4random_uniform(6) + 1)
+        return UIImage(named: "tg\(number).jpg")
     }
 }
 

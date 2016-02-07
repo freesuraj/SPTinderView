@@ -83,11 +83,12 @@ public class SPTinderView: UIView {
         guard let _dataSource = dataSource else { return }
         if let cell = _dataSource.tinderView(self, cellAt: index) {
             cell.onCellDidMove = { direction in
-                if let _delegate = self.delegate {
-                    _delegate.tinderView(self, didMoveCellAt: index, towards: direction)
-                }
                 if direction != .None {
-                    self.animateRemovalForCell(cell, towards: direction)
+                    self.animateRemovalForCell(cell, towards: direction, completion:  {
+                        if let _delegate = self.delegate {
+                            _delegate.tinderView(self, didMoveCellAt: index, towards: direction)
+                        }
+                    })
                 }
             }
             self.insertSubview(cell, atIndex: 0)
@@ -112,7 +113,7 @@ public class SPTinderView: UIView {
         })
     }
     
-    private func animateRemovalForCell(cell: SPTinderViewCell, towards direction: SPTinderViewCellMovement) {
+    private func animateRemovalForCell(cell: SPTinderViewCell, towards direction: SPTinderViewCellMovement, completion:()->()) {
         var newPosition = CGPointZero
         switch direction {
         case .None: return
@@ -129,6 +130,7 @@ public class SPTinderView: UIView {
                 self.insertCell(at: self.currentIndex + self.visibleCount)
                 self.currentIndex += 1
                 self.adjustVisibleCellPosition()
+                completion()
         })
     }
     
