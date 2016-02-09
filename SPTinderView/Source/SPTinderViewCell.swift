@@ -15,7 +15,8 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
     @IBInspectable var reuseIdentifier: String?
     @IBInspectable var cornerRadius: CGFloat = 0 {
         didSet {
-                self.layer.cornerRadius = cornerRadius
+            self.layer.cornerRadius = cornerRadius
+            self.layer.masksToBounds = true
         }
     }
     @IBInspectable var borderWidth: CGFloat = 0 {
@@ -29,7 +30,7 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
             // Add a drop shadow
             self.layer.shadowColor = UIColor.darkGrayColor().CGColor
             self.layer.shadowOffset = CGSizeMake(0, 5)
-            self.layer.masksToBounds = false
+            self.layer.masksToBounds = true
             self.layer.shadowOpacity = 0.5
         }
     }
@@ -73,10 +74,10 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
             // There's also a little bit of transformation. When the cell is being dragged, it should feel the angle of drag as well
             let xDrift = self.center.x + deltaX - originalCenter.x
             let rotationAngle = xDrift * -0.05 * CGFloat(M_PI / 90)
-            
             // Note: Must set the animation option to `AllowUserInteraction` to prevent the main thread being blocked while animation is ongoin
+            let rotatedTransfer = CGAffineTransformMakeRotation(rotationAngle)
             UIView.animateWithDuration(0.0, delay: 0.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
-                self.transform = CGAffineTransformMakeRotation(rotationAngle)
+                self.transform = rotatedTransfer
                 self.center.x += deltaX
                 self.center.y += deltaY
                 }, completion: { finished in

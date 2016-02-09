@@ -103,9 +103,7 @@ public class SPTinderView: UIView {
         return _center
     }
     
-    private func adjustVisibleCellPosition() {
-        print("frame size \(self.frame), center: \(self.center)")
-        
+    private func adjustVisibleCellPosition() {        
         UIView.animateWithDuration(0.1, animations: {
             for (position, cell) in self.visibleCells().enumerate() {
                 cell.center.y = self.center.y - CGFloat(position * 5)

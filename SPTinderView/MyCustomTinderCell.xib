@@ -11,16 +11,24 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SMk-MF-D2x">
-                    <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
+                <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SMk-MF-D2x">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="350"/>
                 </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aOJ-Su-NEM">
+                    <rect key="frame" x="0.0" y="350" width="300" height="50"/>
+                    <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="SMk-MF-D2x" firstAttribute="leading" secondItem="reM-tD-nfn" secondAttribute="leading" id="44K-fc-DcS"/>
+                <constraint firstAttribute="bottom" secondItem="aOJ-Su-NEM" secondAttribute="bottom" id="4OO-yC-Wqf"/>
+                <constraint firstItem="aOJ-Su-NEM" firstAttribute="leading" secondItem="SMk-MF-D2x" secondAttribute="leading" id="Dgl-4f-NpH"/>
                 <constraint firstItem="SMk-MF-D2x" firstAttribute="top" secondItem="reM-tD-nfn" secondAttribute="top" id="QhI-hY-63o"/>
-                <constraint firstAttribute="bottom" secondItem="SMk-MF-D2x" secondAttribute="bottom" id="plG-cb-ATs"/>
+                <constraint firstItem="aOJ-Su-NEM" firstAttribute="top" secondItem="SMk-MF-D2x" secondAttribute="bottom" id="b2P-0b-BCq"/>
+                <constraint firstAttribute="bottom" secondItem="SMk-MF-D2x" secondAttribute="bottom" constant="50" id="plG-cb-ATs"/>
                 <constraint firstAttribute="trailing" secondItem="SMk-MF-D2x" secondAttribute="trailing" id="tRW-Xv-NQ9"/>
+                <constraint firstItem="aOJ-Su-NEM" firstAttribute="trailing" secondItem="SMk-MF-D2x" secondAttribute="trailing" id="tuU-gt-94h"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <userDefinedRuntimeAttributes>

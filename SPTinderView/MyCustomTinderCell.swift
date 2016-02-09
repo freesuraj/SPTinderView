@@ -21,6 +21,7 @@ class MyCustomTinderCell: SPTinderViewCell {
     
     override func awakeFromNib() {
         imageView.layer.masksToBounds = true
+        self.layer.cornerRadius = 10.0
     }
 
 }
