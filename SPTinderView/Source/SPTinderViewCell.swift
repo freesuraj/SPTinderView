@@ -16,22 +16,6 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
     @IBInspectable var cornerRadius: CGFloat = 0 {
         didSet {
             self.layer.cornerRadius = cornerRadius
-            self.layer.masksToBounds = true
-        }
-    }
-    @IBInspectable var borderWidth: CGFloat = 0 {
-        didSet {
-            layer.borderWidth = borderWidth
-        }
-    }
-    @IBInspectable var borderColor: UIColor? {
-        didSet {
-            layer.borderColor = borderColor?.CGColor
-            // Add a drop shadow
-            self.layer.shadowColor = UIColor.darkGrayColor().CGColor
-            self.layer.shadowOffset = CGSizeMake(0, 5)
-            self.layer.masksToBounds = true
-            self.layer.shadowOpacity = 0.5
         }
     }
     
@@ -43,7 +27,7 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
     private var originalCenter = CGPoint(x: 0, y: 0)
     private var scaleToRemoveCell: CGFloat = 0.3
     public override func awakeFromNib() {
-        self.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
     }
     
     public required init(reuseIdentifier: String) {
@@ -53,6 +37,13 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        self.layer.shouldRasterize = true
+        self.layer.borderWidth = 2.0
+        self.layer.borderColor = UIColor.clearColor().CGColor
+        self.layer.shadowColor = UIColor.darkGrayColor().CGColor
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
+        self.layer.shadowOpacity = 0.5
+        self.layer.masksToBounds = false
     }
     
     public required init?(coder aDecoder: NSCoder) {

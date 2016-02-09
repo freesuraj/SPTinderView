@@ -61,6 +61,7 @@ public class SPTinderView: UIView {
         for var index = currentIndex; index < min(visibleCount, count - index); index++ {
             insertCell(at: index)
         }
+        adjustVisibleCellPosition()
     }
     
     private func cleanTinderView() {
@@ -93,14 +94,8 @@ public class SPTinderView: UIView {
             }
             self.insertSubview(cell, atIndex: 0)
             self.sendSubviewToBack(cell)
-            cell.center = self.positionForCellAtIndex(index)
+            cell.center = self.center
         }
-    }
-    
-    private func positionForCellAtIndex(index: Int) -> CGPoint {
-        var _center = center
-        _center.y = center.y + CGFloat((index - currentIndex) * 5)
-        return _center
     }
     
     private func adjustVisibleCellPosition() {        

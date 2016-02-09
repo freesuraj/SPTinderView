@@ -26,7 +26,6 @@ class MyTinderCell: SPTinderViewCell {
         super.init(reuseIdentifier: reuseIdentifier)
         self.frame = CGRect(origin: CGPointZero, size: CGSize(width: 320, height: 400))
         self.backgroundColor = UIColor.getRandomColor()
-        self.borderColor = UIColor.clearColor()
         titleLabel.frame = CGRectMake(0, self.frame.height - 100, self.frame.width, 100)
         imageView.frame = CGRectMake(0, 0, self.frame.width, self.frame.height - 100)
         imageView.clipsToBounds = true
@@ -35,9 +34,7 @@ class MyTinderCell: SPTinderViewCell {
         titleLabel.backgroundColor = UIColor.greenColor()
         self.addSubview(imageView)
         self.addSubview(titleLabel)
-        self.borderWidth = 1.0
         self.cornerRadius = 6.0
-        self.clipsToBounds = true
     }
 }
 
