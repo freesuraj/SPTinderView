@@ -2,6 +2,8 @@
 
 A clone of standard Tinder app's swipe left swipe right view [WIP]
 
+![screenshot](https://github.com/freesuraj/tldr/blob/master/assets/screenshot.gif?raw=true)
+
 #### TODO
 - Add multiple gestures
 - Add direction detector
@@ -13,4 +15,3 @@ A clone of standard Tinder app's swipe left swipe right view [WIP]
 #### Contribution
 
 All the contributions are welcome ! Fork, change and send a pull request.
-
