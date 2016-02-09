@@ -2,7 +2,7 @@
 
 A clone of standard Tinder app's swipe left swipe right view [WIP]
 
-![screenshot](https://github.com/freesuraj/tldr/blob/master/assets/screenshot.gif?raw=true)
+![screenshot](https://github.com/freesuraj/SPTinderView/blob/master/assets/screenshot.gif?raw=true)
 
 #### TODO
 - Add multiple gestures
