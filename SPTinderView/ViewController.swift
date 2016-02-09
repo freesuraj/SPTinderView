@@ -26,16 +26,15 @@ class MyTinderCell: SPTinderViewCell {
         super.init(reuseIdentifier: reuseIdentifier)
         self.frame = CGRect(origin: CGPointZero, size: CGSize(width: 320, height: 400))
         self.backgroundColor = UIColor.getRandomColor()
-        self.borderColor = UIColor.lightGrayColor()
+        self.borderColor = UIColor.clearColor()
         titleLabel.frame = CGRectMake(0, self.frame.height - 100, self.frame.width, 100)
         imageView.frame = CGRectMake(0, 0, self.frame.width, self.frame.height - 100)
         imageView.clipsToBounds = true
         imageView.contentMode = .ScaleAspectFill
         titleLabel.textAlignment = .Center
-        titleLabel.backgroundColor = UIColor.purpleColor()
+        titleLabel.backgroundColor = UIColor.greenColor()
         self.addSubview(imageView)
         self.addSubview(titleLabel)
-//        titleLabel.center = self.center
         self.borderWidth = 1.0
         self.cornerRadius = 6.0
         self.clipsToBounds = true
@@ -52,6 +51,7 @@ class ViewController: UIViewController {
 //        tinderView.registerNib(UINib(nibName: "MyCustomTinderCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tinderView.dataSource = self
         tinderView.delegate = self
+        tinderView.backgroundColor = UIColor.whiteColor()
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,7 +66,7 @@ extension ViewController: SPTinderViewDataSource, SPTinderViewDelegate {
     
     func tinderView(view: SPTinderView, cellAt index: Int) -> SPTinderViewCell? {
         if let cell = tinderView.dequeueReusableCellWithIdentifier(cellIdentifier) as? MyTinderCell {
-            cell.titleLabel.text = "Cell: \(index)"
+            cell.titleLabel.text = "Model No: \(index+1)"
             cell.imageView.image = randomImage()
 //            print("cell.imageview \(cell.imageView) || cell \(cell)")
             return cell
