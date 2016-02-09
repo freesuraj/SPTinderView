@@ -16,7 +16,14 @@
 		ED1F2A361C61D44B0084DD77 /* SPTinderViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F2A351C61D44B0084DD77 /* SPTinderViewUITests.swift */; };
 		ED1F2A451C61D74C0084DD77 /* SPTinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F2A441C61D74C0084DD77 /* SPTinderView.swift */; };
 		ED1F2A491C61E00D0084DD77 /* SPTinderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F2A481C61E00D0084DD77 /* SPTinderViewCell.swift */; };
-		EDA3B6CF1C66430A007F4ECD /* MyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3B6CE1C66430A007F4ECD /* MyTableViewController.swift */; };
+		EDDCDF1C1C674B8B00E27361 /* MyCustomTinderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDCDF1B1C674B8B00E27361 /* MyCustomTinderCell.swift */; };
+		EDDCDF1E1C674B9E00E27361 /* MyCustomTinderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDDCDF1D1C674B9E00E27361 /* MyCustomTinderCell.xib */; };
+		EDDCDF261C674D9800E27361 /* tg1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDDCDF201C674D9800E27361 /* tg1.jpg */; };
+		EDDCDF271C674D9800E27361 /* tg2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDDCDF211C674D9800E27361 /* tg2.jpg */; };
+		EDDCDF281C674D9800E27361 /* tg3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDDCDF221C674D9800E27361 /* tg3.jpg */; };
+		EDDCDF291C674D9800E27361 /* tg4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDDCDF231C674D9800E27361 /* tg4.jpg */; };
+		EDDCDF2A1C674D9800E27361 /* tg5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDDCDF241C674D9800E27361 /* tg5.jpg */; };
+		EDDCDF2B1C674D9800E27361 /* tg6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDDCDF251C674D9800E27361 /* tg6.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +59,14 @@
 		ED1F2A371C61D44B0084DD77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED1F2A441C61D74C0084DD77 /* SPTinderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPTinderView.swift; sourceTree = "<group>"; };
 		ED1F2A481C61E00D0084DD77 /* SPTinderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPTinderViewCell.swift; sourceTree = "<group>"; };
-		EDA3B6CE1C66430A007F4ECD /* MyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewController.swift; sourceTree = "<group>"; };
+		EDDCDF1B1C674B8B00E27361 /* MyCustomTinderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCustomTinderCell.swift; sourceTree = "<group>"; };
+		EDDCDF1D1C674B9E00E27361 /* MyCustomTinderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCustomTinderCell.xib; sourceTree = "<group>"; };
+		EDDCDF201C674D9800E27361 /* tg1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tg1.jpg; sourceTree = "<group>"; };
+		EDDCDF211C674D9800E27361 /* tg2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tg2.jpg; sourceTree = "<group>"; };
+		EDDCDF221C674D9800E27361 /* tg3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tg3.jpg; sourceTree = "<group>"; };
+		EDDCDF231C674D9800E27361 /* tg4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tg4.jpg; sourceTree = "<group>"; };
+		EDDCDF241C674D9800E27361 /* tg5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tg5.jpg; sourceTree = "<group>"; };
+		EDDCDF251C674D9800E27361 /* tg6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tg6.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,11 +120,13 @@
 				ED1F2A431C61D72E0084DD77 /* Source */,
 				ED1F2A151C61D44B0084DD77 /* AppDelegate.swift */,
 				ED1F2A171C61D44B0084DD77 /* ViewController.swift */,
-				EDA3B6CE1C66430A007F4ECD /* MyTableViewController.swift */,
 				ED1F2A191C61D44B0084DD77 /* Main.storyboard */,
+				EDDCDF1B1C674B8B00E27361 /* MyCustomTinderCell.swift */,
+				EDDCDF1D1C674B9E00E27361 /* MyCustomTinderCell.xib */,
 				ED1F2A1C1C61D44B0084DD77 /* Assets.xcassets */,
 				ED1F2A1E1C61D44B0084DD77 /* LaunchScreen.storyboard */,
 				ED1F2A211C61D44B0084DD77 /* Info.plist */,
+				EDDCDF1F1C674D9800E27361 /* TinderGirls */,
 			);
 			path = SPTinderView;
 			sourceTree = "<group>";
@@ -140,6 +156,19 @@
 				ED1F2A481C61E00D0084DD77 /* SPTinderViewCell.swift */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		EDDCDF1F1C674D9800E27361 /* TinderGirls */ = {
+			isa = PBXGroup;
+			children = (
+				EDDCDF201C674D9800E27361 /* tg1.jpg */,
+				EDDCDF211C674D9800E27361 /* tg2.jpg */,
+				EDDCDF221C674D9800E27361 /* tg3.jpg */,
+				EDDCDF231C674D9800E27361 /* tg4.jpg */,
+				EDDCDF241C674D9800E27361 /* tg5.jpg */,
+				EDDCDF251C674D9800E27361 /* tg6.jpg */,
+			);
+			path = TinderGirls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,8 +276,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDDCDF2A1C674D9800E27361 /* tg5.jpg in Resources */,
+				EDDCDF281C674D9800E27361 /* tg3.jpg in Resources */,
 				ED1F2A201C61D44B0084DD77 /* LaunchScreen.storyboard in Resources */,
 				ED1F2A1D1C61D44B0084DD77 /* Assets.xcassets in Resources */,
+				EDDCDF261C674D9800E27361 /* tg1.jpg in Resources */,
+				EDDCDF2B1C674D9800E27361 /* tg6.jpg in Resources */,
+				EDDCDF271C674D9800E27361 /* tg2.jpg in Resources */,
+				EDDCDF291C674D9800E27361 /* tg4.jpg in Resources */,
+				EDDCDF1E1C674B9E00E27361 /* MyCustomTinderCell.xib in Resources */,
 				ED1F2A1B1C61D44B0084DD77 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,7 +313,7 @@
 				ED1F2A181C61D44B0084DD77 /* ViewController.swift in Sources */,
 				ED1F2A491C61E00D0084DD77 /* SPTinderViewCell.swift in Sources */,
 				ED1F2A161C61D44B0084DD77 /* AppDelegate.swift in Sources */,
-				EDA3B6CF1C66430A007F4ECD /* MyTableViewController.swift in Sources */,
+				EDDCDF1C1C674B8B00E27361 /* MyCustomTinderCell.swift in Sources */,
 				ED1F2A451C61D74C0084DD77 /* SPTinderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

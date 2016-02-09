@@ -61,6 +61,7 @@ public class SPTinderView: UIView {
         for var index = currentIndex; index < min(visibleCount, count - index); index++ {
             insertCell(at: index)
         }
+        adjustVisibleCellPosition()
     }
     
     private func cleanTinderView() {
@@ -83,36 +84,29 @@ public class SPTinderView: UIView {
         guard let _dataSource = dataSource else { return }
         if let cell = _dataSource.tinderView(self, cellAt: index) {
             cell.onCellDidMove = { direction in
-                if let _delegate = self.delegate {
-                    _delegate.tinderView(self, didMoveCellAt: index, towards: direction)
-                }
                 if direction != .None {
-                    self.animateRemovalForCell(cell, towards: direction)
+                    self.animateRemovalForCell(cell, towards: direction, completion:  {
+                        if let _delegate = self.delegate {
+                            _delegate.tinderView(self, didMoveCellAt: index, towards: direction)
+                        }
+                    })
                 }
             }
             self.insertSubview(cell, atIndex: 0)
             self.sendSubviewToBack(cell)
-            cell.center = self.positionForCellAtIndex(index)
+            cell.center = self.center
         }
     }
     
-    private func positionForCellAtIndex(index: Int) -> CGPoint {
-        var _center = center
-        _center.y = center.y + CGFloat((index - currentIndex) * 5)
-        return _center
-    }
-    
-    private func adjustVisibleCellPosition() {
-        print("frame size \(self.frame), center: \(self.center)")
-        
-        UIView.animateWithDuration(0.1, animations: {
+    private func adjustVisibleCellPosition() {        
+        UIView.animateWithDuration(0.4, animations: {
             for (position, cell) in self.visibleCells().enumerate() {
                 cell.center.y = self.center.y - CGFloat(position * 5)
             }
         })
     }
     
-    private func animateRemovalForCell(cell: SPTinderViewCell, towards direction: SPTinderViewCellMovement) {
+    private func animateRemovalForCell(cell: SPTinderViewCell, towards direction: SPTinderViewCellMovement, completion:()->()) {
         var newPosition = CGPointZero
         switch direction {
         case .None: return
@@ -129,6 +123,7 @@ public class SPTinderView: UIView {
                 self.insertCell(at: self.currentIndex + self.visibleCount)
                 self.currentIndex += 1
                 self.adjustVisibleCellPosition()
+                completion()
         })
     }
     

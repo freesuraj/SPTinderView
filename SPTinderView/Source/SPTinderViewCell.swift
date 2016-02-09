@@ -15,22 +15,7 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
     @IBInspectable var reuseIdentifier: String?
     @IBInspectable var cornerRadius: CGFloat = 0 {
         didSet {
-                self.layer.cornerRadius = cornerRadius
-        }
-    }
-    @IBInspectable var borderWidth: CGFloat = 0 {
-        didSet {
-            layer.borderWidth = borderWidth
-        }
-    }
-    @IBInspectable var borderColor: UIColor? {
-        didSet {
-            layer.borderColor = borderColor?.CGColor
-            // Add a drop shadow
-            self.layer.shadowColor = UIColor.darkGrayColor().CGColor
-            self.layer.shadowOffset = CGSizeMake(0, 5)
-            self.layer.masksToBounds = false
-            self.layer.shadowOpacity = 0.5
+            self.layer.cornerRadius = cornerRadius
         }
     }
     
@@ -42,7 +27,7 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
     private var originalCenter = CGPoint(x: 0, y: 0)
     private var scaleToRemoveCell: CGFloat = 0.3
     public override func awakeFromNib() {
-        self.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
     }
     
     public required init(reuseIdentifier: String) {
@@ -52,6 +37,13 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        self.layer.shouldRasterize = true
+        self.layer.borderWidth = 2.0
+        self.layer.borderColor = UIColor.clearColor().CGColor
+        self.layer.shadowColor = UIColor.darkGrayColor().CGColor
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
+        self.layer.shadowOpacity = 0.5
+        self.layer.masksToBounds = false
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -73,10 +65,10 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
             // There's also a little bit of transformation. When the cell is being dragged, it should feel the angle of drag as well
             let xDrift = self.center.x + deltaX - originalCenter.x
             let rotationAngle = xDrift * -0.05 * CGFloat(M_PI / 90)
-            
             // Note: Must set the animation option to `AllowUserInteraction` to prevent the main thread being blocked while animation is ongoin
+            let rotatedTransfer = CGAffineTransformMakeRotation(rotationAngle)
             UIView.animateWithDuration(0.0, delay: 0.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
-                self.transform = CGAffineTransformMakeRotation(rotationAngle)
+                self.transform = rotatedTransfer
                 self.center.x += deltaX
                 self.center.y += deltaY
                 }, completion: { finished in

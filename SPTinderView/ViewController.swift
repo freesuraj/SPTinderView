@@ -8,8 +8,11 @@
 
 import UIKit
 
+let cellIdentifier = "MyTinderCell"
+
 class MyTinderCell: SPTinderViewCell {
     let titleLabel: UILabel = UILabel(frame: CGRectZero)
+    let imageView: UIImageView = UIImageView(frame: CGRectZero)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,12 +26,15 @@ class MyTinderCell: SPTinderViewCell {
         super.init(reuseIdentifier: reuseIdentifier)
         self.frame = CGRect(origin: CGPointZero, size: CGSize(width: 320, height: 400))
         self.backgroundColor = UIColor.getRandomColor()
-        self.borderColor = UIColor.lightGrayColor()
-        self.cornerRadius = 6.0
-        titleLabel.frame = self.frame
+        titleLabel.frame = CGRectMake(0, self.frame.height - 100, self.frame.width, 100)
+        imageView.frame = CGRectMake(0, 0, self.frame.width, self.frame.height - 100)
+        imageView.clipsToBounds = true
+        imageView.contentMode = .ScaleAspectFill
         titleLabel.textAlignment = .Center
+        titleLabel.backgroundColor = UIColor.greenColor()
+        self.addSubview(imageView)
         self.addSubview(titleLabel)
-        self.borderWidth = 1.0
+        self.cornerRadius = 6.0
     }
 }
 
@@ -38,10 +44,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tinderView.frame = self.view.frame
-        tinderView.registerClass(MyTinderCell.self, forCellReuseIdentifier: "MyTinderCell")
+        tinderView.registerClass(MyTinderCell.self, forCellReuseIdentifier: cellIdentifier)
+//        tinderView.registerNib(UINib(nibName: "MyCustomTinderCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tinderView.dataSource = self
         tinderView.delegate = self
-        print("tv frame size \(self.tinderView.frame), this view: \(self.view.frame)")
+        tinderView.backgroundColor = UIColor.whiteColor()
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,9 +62,10 @@ extension ViewController: SPTinderViewDataSource, SPTinderViewDelegate {
     }
     
     func tinderView(view: SPTinderView, cellAt index: Int) -> SPTinderViewCell? {
-        if let cell = tinderView.dequeueReusableCellWithIdentifier("MyTinderCell") as? MyTinderCell {
-            cell.titleLabel.text = "\(index)"
-            cell.backgroundColor = UIColor.getRandomColor()
+        if let cell = tinderView.dequeueReusableCellWithIdentifier(cellIdentifier) as? MyTinderCell {
+            cell.titleLabel.text = "Model No: \(index+1)"
+            cell.imageView.image = randomImage()
+//            print("cell.imageview \(cell.imageView) || cell \(cell)")
             return cell
         }
         return nil
@@ -65,6 +73,11 @@ extension ViewController: SPTinderViewDataSource, SPTinderViewDelegate {
     
     func tinderView(view: SPTinderView, didMoveCellAt index: Int, towards direction: SPTinderViewCellMovement) {
         print("\(direction)")
+    }
+    
+    func randomImage() -> UIImage? {
+        let number = Int(arc4random_uniform(6) + 1)
+        return UIImage(named: "tg\(number).jpg")
     }
 }
 
