@@ -16,6 +16,8 @@
 		ED1F2A361C61D44B0084DD77 /* SPTinderViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F2A351C61D44B0084DD77 /* SPTinderViewUITests.swift */; };
 		ED1F2A451C61D74C0084DD77 /* SPTinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F2A441C61D74C0084DD77 /* SPTinderView.swift */; };
 		ED1F2A491C61E00D0084DD77 /* SPTinderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F2A481C61E00D0084DD77 /* SPTinderViewCell.swift */; };
+		ED1F2AB91C6B08850084DD77 /* TinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F2AB81C6B08850084DD77 /* TinderViewController.swift */; };
+		ED1F2ABB1C6B09500084DD77 /* TinderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F2ABA1C6B09500084DD77 /* TinderModel.swift */; };
 		EDDCDF1C1C674B8B00E27361 /* MyCustomTinderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDCDF1B1C674B8B00E27361 /* MyCustomTinderCell.swift */; };
 		EDDCDF1E1C674B9E00E27361 /* MyCustomTinderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDDCDF1D1C674B9E00E27361 /* MyCustomTinderCell.xib */; };
 		EDDCDF261C674D9800E27361 /* tg1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDDCDF201C674D9800E27361 /* tg1.jpg */; };
@@ -59,6 +61,8 @@
 		ED1F2A371C61D44B0084DD77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED1F2A441C61D74C0084DD77 /* SPTinderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPTinderView.swift; sourceTree = "<group>"; };
 		ED1F2A481C61E00D0084DD77 /* SPTinderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPTinderViewCell.swift; sourceTree = "<group>"; };
+		ED1F2AB81C6B08850084DD77 /* TinderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TinderViewController.swift; sourceTree = "<group>"; };
+		ED1F2ABA1C6B09500084DD77 /* TinderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TinderModel.swift; sourceTree = "<group>"; };
 		EDDCDF1B1C674B8B00E27361 /* MyCustomTinderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCustomTinderCell.swift; sourceTree = "<group>"; };
 		EDDCDF1D1C674B9E00E27361 /* MyCustomTinderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCustomTinderCell.xib; sourceTree = "<group>"; };
 		EDDCDF201C674D9800E27361 /* tg1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tg1.jpg; sourceTree = "<group>"; };
@@ -118,15 +122,17 @@
 			isa = PBXGroup;
 			children = (
 				ED1F2A431C61D72E0084DD77 /* Source */,
+				EDDCDF1F1C674D9800E27361 /* TinderGirls */,
 				ED1F2A151C61D44B0084DD77 /* AppDelegate.swift */,
 				ED1F2A171C61D44B0084DD77 /* ViewController.swift */,
+				ED1F2AB81C6B08850084DD77 /* TinderViewController.swift */,
+				ED1F2ABA1C6B09500084DD77 /* TinderModel.swift */,
 				ED1F2A191C61D44B0084DD77 /* Main.storyboard */,
 				EDDCDF1B1C674B8B00E27361 /* MyCustomTinderCell.swift */,
 				EDDCDF1D1C674B9E00E27361 /* MyCustomTinderCell.xib */,
 				ED1F2A1C1C61D44B0084DD77 /* Assets.xcassets */,
 				ED1F2A1E1C61D44B0084DD77 /* LaunchScreen.storyboard */,
 				ED1F2A211C61D44B0084DD77 /* Info.plist */,
-				EDDCDF1F1C674D9800E27361 /* TinderGirls */,
 			);
 			path = SPTinderView;
 			sourceTree = "<group>";
@@ -312,7 +318,9 @@
 			files = (
 				ED1F2A181C61D44B0084DD77 /* ViewController.swift in Sources */,
 				ED1F2A491C61E00D0084DD77 /* SPTinderViewCell.swift in Sources */,
+				ED1F2AB91C6B08850084DD77 /* TinderViewController.swift in Sources */,
 				ED1F2A161C61D44B0084DD77 /* AppDelegate.swift in Sources */,
+				ED1F2ABB1C6B09500084DD77 /* TinderModel.swift in Sources */,
 				EDDCDF1C1C674B8B00E27361 /* MyCustomTinderCell.swift in Sources */,
 				ED1F2A451C61D74C0084DD77 /* SPTinderView.swift in Sources */,
 			);

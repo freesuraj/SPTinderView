@@ -27,6 +27,7 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
     private var originalCenter = CGPoint(x: 0, y: 0)
     private var scaleToRemoveCell: CGFloat = 0.3
     public override func awakeFromNib() {
+        super.awakeFromNib()
         self.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
     }
     
@@ -37,6 +38,15 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        setupLayerAttributes()
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupLayerAttributes()
+    }
+    
+    private func setupLayerAttributes() {
         self.layer.shouldRasterize = true
         self.layer.borderWidth = 2.0
         self.layer.borderColor = UIColor.clearColor().CGColor
@@ -44,10 +54,6 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
         self.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
         self.layer.shadowOpacity = 0.5
         self.layer.masksToBounds = false
-    }
-    
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
     }
     
     public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -67,7 +73,7 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
             let rotationAngle = xDrift * -0.05 * CGFloat(M_PI / 90)
             // Note: Must set the animation option to `AllowUserInteraction` to prevent the main thread being blocked while animation is ongoin
             let rotatedTransfer = CGAffineTransformMakeRotation(rotationAngle)
-            UIView.animateWithDuration(0.0, delay: 0.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
+            UIView.animateWithDuration(0.0, delay: 0.0, options: [.AllowUserInteraction], animations: {
                 self.transform = rotatedTransfer
                 self.center.x += deltaX
                 self.center.y += deltaY
@@ -83,7 +89,7 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
     }
     
     public override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        UIView.animateWithDuration(0.2, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
+        UIView.animateWithDuration(0.2, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1, options: [.AllowUserInteraction], animations: {
             self.center = self.originalCenter
             self.transform = CGAffineTransformIdentity
             }, completion: { finished in

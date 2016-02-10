@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -16,7 +16,21 @@
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aOJ-Su-NEM">
                     <rect key="frame" x="0.0" y="350" width="300" height="50"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTc-R2-6nP">
+                            <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
                     <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="tTc-R2-6nP" secondAttribute="trailing" id="6nn-2T-cCt"/>
+                        <constraint firstItem="tTc-R2-6nP" firstAttribute="leading" secondItem="aOJ-Su-NEM" secondAttribute="leading" id="BGJ-dN-jHW"/>
+                        <constraint firstItem="tTc-R2-6nP" firstAttribute="top" secondItem="aOJ-Su-NEM" secondAttribute="top" id="uqp-Ld-BhT"/>
+                        <constraint firstAttribute="bottom" secondItem="tTc-R2-6nP" secondAttribute="bottom" id="waY-Ee-42h"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -32,19 +46,11 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                    <real key="value" value="16"/>
-                </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                    <real key="value" value="0.0"/>
-                </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                    <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="string" keyPath="reuseIdentifier" value="MyCustomTinderCell"/>
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="imageView" destination="SMk-MF-D2x" id="z0t-g3-3av"/>
+                <outlet property="titleLabel" destination="tTc-R2-6nP" id="xCm-GG-qGO"/>
             </connections>
             <point key="canvasLocation" x="301" y="-14"/>
         </view>

@@ -10,18 +10,11 @@ import UIKit
 
 class MyCustomTinderCell: SPTinderViewCell {
     @IBOutlet var imageView: UIImageView!
-
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-    }
-    */
+    @IBOutlet var titleLabel: UILabel!
     
     override func awakeFromNib() {
-        imageView.layer.masksToBounds = true
-        self.layer.cornerRadius = 10.0
+        imageView.clipsToBounds = true
+        imageView.contentMode = .ScaleAspectFill
     }
 
 }
