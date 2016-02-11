@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ve9-SK-TC5">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Class-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SPTinderView" customModuleProvider="target" sceneMemberID="viewController">
@@ -37,11 +37,64 @@
                             </mask>
                         </variation>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Class" id="1rN-fT-bAd"/>
                     <connections>
                         <outlet property="tinderView" destination="yXg-y3-tRm" id="oMf-D6-Dji"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1110" y="298"/>
+        </scene>
+        <!--Xib-->
+        <scene sceneID="EQ6-jL-xdO">
+            <objects>
+                <viewController id="H0a-e7-6Gf" customClass="TinderViewController" customModule="SPTinderView" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9bT-Sy-2Ej"/>
+                        <viewControllerLayoutGuide type="bottom" id="zkm-Af-g3D"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ml6-HL-H9a">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C6n-2H-r81" customClass="SPTinderView" customModule="SPTinderView" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="C6n-2H-r81" firstAttribute="width" secondItem="Ml6-HL-H9a" secondAttribute="width" id="JIq-D7-J9G"/>
+                            <constraint firstItem="C6n-2H-r81" firstAttribute="height" secondItem="Ml6-HL-H9a" secondAttribute="height" id="VL0-Ji-LQY"/>
+                            <constraint firstItem="C6n-2H-r81" firstAttribute="centerX" secondItem="Ml6-HL-H9a" secondAttribute="centerX" id="kz5-pm-n1s"/>
+                            <constraint firstItem="C6n-2H-r81" firstAttribute="centerY" secondItem="Ml6-HL-H9a" secondAttribute="centerY" id="wEg-RN-DMc"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Xib" id="5EV-Ky-AiH"/>
+                    <connections>
+                        <outlet property="tinderView" destination="C6n-2H-r81" id="gzI-Px-9gx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jT6-ib-t0x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1048" y="1008"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="pLo-if-P6u">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ve9-SK-TC5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="X5J-60-a5b">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="fHv-ge-x8v"/>
+                        <segue destination="H0a-e7-6Gf" kind="relationship" relationship="viewControllers" id="tF8-xR-2E3"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jZ7-5n-jZ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="462" y="329"/>
         </scene>

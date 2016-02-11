@@ -99,7 +99,7 @@ public class SPTinderView: UIView {
     }
     
     private func adjustVisibleCellPosition() {        
-        UIView.animateWithDuration(0.4, animations: {
+        UIView.animateWithDuration(0.3, animations: {
             for (position, cell) in self.visibleCells().enumerate() {
                 cell.center.y = self.center.y - CGFloat(position * 5)
             }
@@ -128,10 +128,21 @@ public class SPTinderView: UIView {
     }
     
     // MARK: Public Method
+    /**
+    Register the Cell class from the provided nib file. The registered cells will be cached which can be retrieved usign ``dequeueReusableCellWithIdentifier: `` method
+    
+    @see dequeueReusableCellWithIdentifier:
+    
+    - parameter nib:        UINib of the cell class of type `SPTinderViewCell`
+    - parameter identifier: Identifier that ties the cellClass onto SPTinderView
+    */
     public func registerNib(nib: UINib?, forCellReuseIdentifier identifier: String) {
         guard let _nib = nib else { return }
         for _ in 0...visibleCount {
-            if let cell = _nib.instantiateWithOwner(self, options: nil).first as? SPTinderViewCell {
+            if let cell = _nib.instantiateWithOwner(nil, options: nil).first as? SPTinderViewCell {
+                for aView in cell.subviews {
+                    aView.translatesAutoresizingMaskIntoConstraints = true
+                }
                 registerACell(cell, forIdentifier: identifier)
             }
         }
@@ -142,7 +153,7 @@ public class SPTinderView: UIView {
      @see dequeueReusableCellWithIdentifier:
      
      - parameter cellClass:  Cell class that conforms to `SPTinderViewCell`
-     - parameter identifier: identifier that ties the cellClass onto SPTinderView
+     - parameter identifier: Identifier that ties the cellClass onto SPTinderView
      */
     public func registerClass(cellClass: AnyClass?, forCellReuseIdentifier identifier: String) {
         if let cell = cellClass as? SPTinderViewCell.Type {
