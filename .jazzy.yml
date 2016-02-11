@@ -1,0 +1,10 @@
+clean
+author Suraj Pathak
+author_url https://freesuraj.github.io
+github_url https://github.com/freesuraj/SPTinderView
+github-file-prefix https://github.com/freesuraj/SPTinderView
+module-version 0.1.0
+xcodebuild-arguments -scheme,SPTinderView
+module SPTinderView
+output docs/swift_output
+template-directory docs/templates
