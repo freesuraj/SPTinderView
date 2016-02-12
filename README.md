@@ -8,7 +8,7 @@ A clone of standard Tinder app's swipe left swipe right view
 ![screenshot](https://github.com/freesuraj/SPTinderView/blob/master/assets/screenshot.gif?raw=true)
 
 #### Installation
-###### Cocoapods
+###### CocoaPods
       pod SPTinderView
 ###### Manual:
   Copy the swift files in `Source` directory
