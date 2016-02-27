@@ -35,6 +35,7 @@ public class SPTinderView: UIView {
     var delegate: SPTinderViewDelegate?
     var currentIndex: Int = 0
     private let visibleCount = 3
+    private var numberOfCells = 0
     
     // MARK: Initialization
     public override init(frame: CGRect) {
@@ -57,8 +58,8 @@ public class SPTinderView: UIView {
     
     private func setUpFirstSetOfCells() {
         guard let _dataSource = dataSource else { return }
-        let count = _dataSource.numberOfItemsInTinderView(self)
-        for var index = currentIndex; index < min(visibleCount, count - index); index++ {
+        numberOfCells = _dataSource.numberOfItemsInTinderView(self)
+        for var index = currentIndex; index < min(visibleCount, numberOfCells - index); index++ {
             insertCell(at: index)
         }
         adjustVisibleCellPosition()
@@ -67,7 +68,9 @@ public class SPTinderView: UIView {
     private func cleanTinderView() {
         for cell in visibleCells() {
             cell.removeFromSuperview()
+            recycleACell(cell)
         }
+        currentIndex = 0
     }
     
     private func visibleCells() -> [SPTinderViewCell] {
@@ -81,7 +84,7 @@ public class SPTinderView: UIView {
     }
     
     private func insertCell(at index: Int) {
-        guard let _dataSource = dataSource else { return }
+        guard let _dataSource = dataSource where index < numberOfCells else { return }
         if let cell = _dataSource.tinderView(self, cellAt: index) {
             cell.onCellDidMove = { direction in
                 if direction != .None {

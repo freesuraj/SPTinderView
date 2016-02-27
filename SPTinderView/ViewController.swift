@@ -40,6 +40,7 @@ class MyTinderCell: SPTinderViewCell {
 class ViewController: UIViewController {
     @IBOutlet var tinderView: SPTinderView!
     let cellIdentifier = "MyTinderCell"
+    var cellCount = 5
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,16 +49,22 @@ class ViewController: UIViewController {
         tinderView.dataSource = self
         tinderView.delegate = self
         tinderView.backgroundColor = UIColor.whiteColor()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "RELOAD", style: .Plain, target: self, action: "onReload")
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    func onReload() {
+        cellCount++
+        tinderView.reloadData()
+    }
 }
 
 extension ViewController: SPTinderViewDataSource, SPTinderViewDelegate {
     func numberOfItemsInTinderView(view: SPTinderView) -> Int {
-        return 20
+        return cellCount
     }
     
     func tinderView(view: SPTinderView, cellAt index: Int) -> SPTinderViewCell? {
