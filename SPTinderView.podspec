@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'SPTinderView'
-  s.version = '0.2.0'
+  s.version = '0.3.0'
   s.license = 'MIT'
   s.summary = 'Tinder View written in Swift'
   s.homepage = 'https://github.com/freesuraj/SPTinderView'
