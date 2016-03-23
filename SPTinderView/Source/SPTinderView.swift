@@ -26,14 +26,14 @@ public class SPTinderView: UIView {
     // Cache
     private var caches: [SPCache] = []
     
-    var dataSource: SPTinderViewDataSource? {
+    public var dataSource: SPTinderViewDataSource? {
         didSet {
             self.reloadData()
         }
     }
     
-    var delegate: SPTinderViewDelegate?
-    var currentIndex: Int = 0
+    public var delegate: SPTinderViewDelegate?
+    public var currentIndex: Int = 0
     private let visibleCount = 3
     private var numberOfCells = 0
     
