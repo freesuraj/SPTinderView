@@ -11,20 +11,20 @@ import UIKit
 
 /// Protocol that feeds the necessary data for SPTinderView
 public protocol SPTinderViewDataSource {
-    func numberOfItemsInTinderView(view: SPTinderView) -> Int
-    func tinderView(view: SPTinderView, cellAt index: Int) -> SPTinderViewCell?
+    func numberOfItemsInTinderView(_ view: SPTinderView) -> Int
+    func tinderView(_ view: SPTinderView, cellAt index: Int) -> SPTinderViewCell?
 }
 
 ///`SPTinderViewDelegate` tells the object conforming it about the actions about the cells in `SPTinderView`
 public protocol SPTinderViewDelegate {
-    func tinderView(view: SPTinderView, didMoveCellAt index: Int, towards direction: SPTinderViewCellMovement)
+    func tinderView(_ view: SPTinderView, didMoveCellAt index: Int, towards direction: SPTinderViewCellMovement)
 }
 
 /// `SPTinderView` is view that mimics the behavior of shuffling cards of a deck left or right, as seen in the popular dating app *Tinder*.
 public class SPTinderView: UIView {
     
     // Cache
-    private var caches: [SPCache] = []
+    fileprivate var caches: [SPCache] = []
     
     public var dataSource: SPTinderViewDataSource? {
         didSet {
@@ -34,8 +34,8 @@ public class SPTinderView: UIView {
     
     public var delegate: SPTinderViewDelegate?
     public var currentIndex: Int = 0
-    private let visibleCount = 3
-    private var numberOfCells = 0
+    fileprivate let visibleCount = 3
+    fileprivate var numberOfCells = 0
     
     // MARK: Initialization
     public override init(frame: CGRect) {
@@ -56,16 +56,16 @@ public class SPTinderView: UIView {
         super.layoutSubviews()
     }
     
-    private func setUpFirstSetOfCells() {
+    fileprivate func setUpFirstSetOfCells() {
         guard let _dataSource = dataSource else { return }
         numberOfCells = _dataSource.numberOfItemsInTinderView(self)
-        for var index = currentIndex; index < min(visibleCount, numberOfCells - index); index++ {
+        for index in currentIndex ..< min(visibleCount, numberOfCells - currentIndex) {
             insertCell(at: index)
         }
         adjustVisibleCellPosition()
     }
     
-    private func cleanTinderView() {
+    fileprivate func cleanTinderView() {
         for cell in visibleCells() {
             cell.removeFromSuperview()
             recycleACell(cell)
@@ -73,7 +73,7 @@ public class SPTinderView: UIView {
         currentIndex = 0
     }
     
-    private func visibleCells() -> [SPTinderViewCell] {
+    fileprivate func visibleCells() -> [SPTinderViewCell] {
         var cells: [SPTinderViewCell] = []
         for aView in self.subviews {
             if let cell = aView as? SPTinderViewCell {
@@ -83,11 +83,11 @@ public class SPTinderView: UIView {
         return cells
     }
     
-    private func insertCell(at index: Int) {
-        guard let _dataSource = dataSource where index < numberOfCells else { return }
+    fileprivate func insertCell(at index: Int) {
+        guard let _dataSource = dataSource , index < numberOfCells else { return }
         if let cell = _dataSource.tinderView(self, cellAt: index) {
             cell.onCellDidMove = { direction in
-                if direction != .None {
+                if direction != .none {
                     self.animateRemovalForCell(cell, towards: direction, completion:  {
                         if let _delegate = self.delegate {
                             _delegate.tinderView(self, didMoveCellAt: index, towards: direction)
@@ -95,30 +95,30 @@ public class SPTinderView: UIView {
                     })
                 }
             }
-            self.insertSubview(cell, atIndex: 0)
-            self.sendSubviewToBack(cell)
+            self.insertSubview(cell, at: 0)
+            self.sendSubview(toBack: cell)
             cell.center = self.center
         }
     }
     
-    private func adjustVisibleCellPosition() {        
-        UIView.animateWithDuration(0.3, animations: {
-            for (position, cell) in self.visibleCells().enumerate() {
+    fileprivate func adjustVisibleCellPosition() {        
+        UIView.animate(withDuration: 0.3, animations: {
+            for (position, cell) in self.visibleCells().enumerated() {
                 cell.center.y = self.center.y - CGFloat(position * 5)
             }
         })
     }
     
-    private func animateRemovalForCell(cell: SPTinderViewCell, towards direction: SPTinderViewCellMovement, completion:()->()) {
-        var newPosition = CGPointZero
+    fileprivate func animateRemovalForCell(_ cell: SPTinderViewCell, towards direction: SPTinderViewCellMovement, completion:@escaping ()->()) {
+        var newPosition = CGPoint.zero
         switch direction {
-        case .None: return
-        case .Left: newPosition = CGPoint(x: -2*cell.frame.width, y: cell.center.y)
-        case .Right: newPosition = CGPoint(x: 2*cell.frame.width, y: cell.center.y)
-        case .Top: newPosition = CGPoint(x: cell.center.x, y: -2*cell.frame.height)
-        case .Bottom: newPosition = CGPoint(x: cell.center.x, y: 2*cell.frame.height)
+        case .none: return
+        case .left: newPosition = CGPoint(x: -2*cell.frame.width, y: cell.center.y)
+        case .right: newPosition = CGPoint(x: 2*cell.frame.width, y: cell.center.y)
+        case .top: newPosition = CGPoint(x: cell.center.x, y: -2*cell.frame.height)
+        case .bottom: newPosition = CGPoint(x: cell.center.x, y: 2*cell.frame.height)
         }
-        UIView.animateWithDuration(0.3, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             cell.center = newPosition
             }, completion: { finished in
                 cell.removeFromSuperview()
@@ -139,12 +139,12 @@ public class SPTinderView: UIView {
     - parameter nib:        UINib of the cell class of type `SPTinderViewCell`
     - parameter identifier: Identifier that ties the cellClass onto SPTinderView
     */
-    public func registerNib(nib: UINib?, forCellReuseIdentifier identifier: String) {
+    public func registerNib(_ nib: UINib?, forCellReuseIdentifier identifier: String) {
         guard let _nib = nib else { return }
         for _ in 0...visibleCount {
-            if let cell = _nib.instantiateWithOwner(nil, options: nil).first as? SPTinderViewCell {
+            if let cell = _nib.instantiate(withOwner: nil, options: nil).first as? SPTinderViewCell {
                 for aView in cell.subviews {
-                    aView.translatesAutoresizingMaskIntoConstraints = true
+                    aView.translatesAutoresizingMaskIntoConstraints = false
                 }
                 registerACell(cell, forIdentifier: identifier)
             }
@@ -158,7 +158,7 @@ public class SPTinderView: UIView {
      - parameter cellClass:  Cell class that conforms to `SPTinderViewCell`
      - parameter identifier: Identifier that ties the cellClass onto SPTinderView
      */
-    public func registerClass(cellClass: AnyClass?, forCellReuseIdentifier identifier: String) {
+    public func registerClass(_ cellClass: AnyClass?, forCellReuseIdentifier identifier: String) {
         if let cell = cellClass as? SPTinderViewCell.Type {
             for _ in 0...visibleCount {
                 registerACell(cell.init(reuseIdentifier: identifier), forIdentifier: identifier)
@@ -173,7 +173,7 @@ public class SPTinderView: UIView {
 
     - returns: `SPTinderViewCell` if cell exists in cache or a nil
      */
-    public func dequeueReusableCellWithIdentifier(identifier: String) -> SPTinderViewCell? {
+    public func dequeueReusableCellWithIdentifier(_ identifier: String) -> SPTinderViewCell? {
         let cell = self.getAFreeCellForIdentifier(identifier)
         return cell
     }
@@ -184,7 +184,7 @@ public class SPTinderView: UIView {
     }
     
     // MARK: Cache Management
-    private func getAFreeCellForIdentifier(identifier: String) -> SPTinderViewCell? {
+    fileprivate func getAFreeCellForIdentifier(_ identifier: String) -> SPTinderViewCell? {
         for cache in caches {
             if cache.identifier == identifier {
                 return cache.getAFreeCell()
@@ -193,7 +193,7 @@ public class SPTinderView: UIView {
         return nil
     }
     
-    private func registerACell(cell: SPTinderViewCell, forIdentifier identifier: String) {
+    fileprivate func registerACell(_ cell: SPTinderViewCell, forIdentifier identifier: String) {
         for cache in caches {
             if cache.identifier == identifier {
                 cache.recycleACell(cell)
@@ -205,7 +205,7 @@ public class SPTinderView: UIView {
         caches.append(cache)
     }
     
-    private func recycleACell(cell: SPTinderViewCell) {
+    fileprivate func recycleACell(_ cell: SPTinderViewCell) {
         for cache in caches {
             if cache.identifier == cell.reuseIdentifier {
                 cache.recycleACell(cell)
@@ -224,7 +224,7 @@ private class SPCache {
         identifier = _identifier
     }
     
-    func recycleACell(cell: SPTinderViewCell) {
+    func recycleACell(_ cell: SPTinderViewCell) {
         for cachedCell in cachedCells {
             if cachedCell.cell == cell {
                 cachedCell.isFree = true
@@ -240,7 +240,7 @@ private class SPCache {
             if cachedCell.isFree {
                 cachedCell.isFree = false
                 cachedCell.cell.alpha = 1.0
-                cachedCell.cell.transform = CGAffineTransformIdentity
+                cachedCell.cell.transform = CGAffineTransform.identity
                 return cachedCell.cell
             }
         }

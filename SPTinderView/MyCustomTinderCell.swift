@@ -13,8 +13,10 @@ class MyCustomTinderCell: SPTinderViewCell {
     @IBOutlet var titleLabel: UILabel!
     
     override func awakeFromNib() {
+        super.awakeFromNib()
+        self.frame = CGRect(x: 0, y: 0, width: 300, height: 400)
         imageView.clipsToBounds = true
-        imageView.contentMode = .ScaleAspectFill
+        imageView.contentMode = .scaleAspectFill
     }
 
 }

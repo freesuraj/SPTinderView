@@ -19,13 +19,13 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    var cellMovement: SPTinderViewCellMovement = .None
+    var cellMovement: SPTinderViewCellMovement = .none
     
     typealias cellMovementChange = (SPTinderViewCellMovement) -> ()
     var onCellDidMove: cellMovementChange?
     
-    private var originalCenter = CGPoint(x: 0, y: 0)
-    private var scaleToRemoveCell: CGFloat = 0.3
+    fileprivate var originalCenter = CGPoint(x: 0, y: 0)
+    fileprivate var scaleToRemoveCell: CGFloat = 0.3
     public override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
@@ -46,25 +46,25 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
         setupLayerAttributes()
     }
     
-    private func setupLayerAttributes() {
-        self.layer.shouldRasterize = true
+    fileprivate func setupLayerAttributes() {
+        self.layer.shouldRasterize = false
         self.layer.borderWidth = 2.0
-        self.layer.borderColor = UIColor.clearColor().CGColor
-        self.layer.shadowColor = UIColor.darkGrayColor().CGColor
+        self.layer.borderColor = UIColor.clear.cgColor
+        self.layer.shadowColor = UIColor.darkGray.cgColor
         self.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
         self.layer.shadowOpacity = 0.5
         self.layer.masksToBounds = false
     }
     
-    public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let _ = touches.first else { return }
         originalCenter = self.center
     }
     
-    public override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
-            let prevLoc = touch.previousLocationInView(self)
-            let thisLoc = touch.locationInView(self)
+            let prevLoc = touch.previousLocation(in: self)
+            let thisLoc = touch.location(in: self)
             
             let deltaX = thisLoc.x - prevLoc.x
             let deltaY = thisLoc.y - prevLoc.y
@@ -72,50 +72,51 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
             let xDrift = self.center.x + deltaX - originalCenter.x
             let rotationAngle = xDrift * -0.05 * CGFloat(M_PI / 90)
             // Note: Must set the animation option to `AllowUserInteraction` to prevent the main thread being blocked while animation is ongoin
-            let rotatedTransfer = CGAffineTransformMakeRotation(rotationAngle)
-            UIView.animateWithDuration(0.0, delay: 0.0, options: [.AllowUserInteraction], animations: {
+            let rotatedTransfer = CGAffineTransform(rotationAngle: rotationAngle)
+            UIView.animate(withDuration: 0.0, delay: 0.0, options: [.allowUserInteraction], animations: {
                 self.transform = rotatedTransfer
                 self.center.x += deltaX
                 self.center.y += deltaY
                 }, completion: { finished in
+                    
             })
         }
     }
     
-    public override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let xDrift = self.center.x - originalCenter.x
         let yDrift = self.center.y - originalCenter.y
         self.setCellMovementDirectionFromDrift(xDrift, yDrift: yDrift)
     }
     
-    public override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        UIView.animateWithDuration(0.2, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1, options: [.AllowUserInteraction], animations: {
+    public override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        UIView.animate(withDuration: 0.2, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1, options: [.allowUserInteraction], animations: {
             self.center = self.originalCenter
-            self.transform = CGAffineTransformIdentity
+            self.transform = CGAffineTransform.identity
             }, completion: { finished in
         })
     }
     
-    public override func touchesEstimatedPropertiesUpdated(touches: Set<NSObject>) {
+    public override func touchesEstimatedPropertiesUpdated(_ touches: Set<UITouch>) {
        //
     }
     
-    func setCellMovementDirectionFromDrift(xDrift: CGFloat, yDrift: CGFloat){
-        var movement: SPTinderViewCellMovement = .None
-        if(xDrift > self.frame.width * scaleToRemoveCell) { movement = .Right }
-        else if(-xDrift > self.frame.width * scaleToRemoveCell) { movement = .Left }
-        else if(-yDrift > self.frame.height * scaleToRemoveCell) { movement = .Top }
-        else if(yDrift > self.frame.height * scaleToRemoveCell) { movement = .Bottom }
-        else { movement = .None }
-        if movement != .None  {
+    func setCellMovementDirectionFromDrift(_ xDrift: CGFloat, yDrift: CGFloat){
+        var movement: SPTinderViewCellMovement = .none
+        if(xDrift > self.frame.width * scaleToRemoveCell) { movement = .right }
+        else if(-xDrift > self.frame.width * scaleToRemoveCell) { movement = .left }
+        else if(-yDrift > self.frame.height * scaleToRemoveCell) { movement = .top }
+        else if(yDrift > self.frame.height * scaleToRemoveCell) { movement = .bottom }
+        else { movement = .none }
+        if movement != .none  {
             self.cellMovement = movement
             if let cellMoveBlock = onCellDidMove {
                 cellMoveBlock(movement)
             }
         } else {
-            UIView.animateWithDuration(0.5, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [.AllowUserInteraction], animations: {
+            UIView.animate(withDuration: 0.5, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [.allowUserInteraction], animations: {
                 self.center = self.originalCenter
-                self.transform = CGAffineTransformIdentity
+                self.transform = CGAffineTransform.identity
                 }, completion: nil)
         }
     }
@@ -131,10 +132,10 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
  - Right:  When the cell has moved towards right
  */
 public enum SPTinderViewCellMovement: Int {
-    case None
-    case Top
-    case Left
-    case Bottom
-    case Right
+    case none
+    case top
+    case left
+    case bottom
+    case right
 }
 

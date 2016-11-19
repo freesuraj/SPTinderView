@@ -1,48 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G26a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="reM-tD-nfn" customClass="MyCustomTinderCell" customModule="SPTinderView" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
+            <rect key="frame" x="0.0" y="0.0" width="179" height="274"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SMk-MF-D2x">
-                    <rect key="frame" x="0.0" y="0.0" width="300" height="350"/>
-                </imageView>
+                <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SMk-MF-D2x"/>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aOJ-Su-NEM">
-                    <rect key="frame" x="0.0" y="350" width="300" height="50"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTc-R2-6nP">
-                            <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="17"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="tTc-R2-6nP" secondAttribute="trailing" id="6nn-2T-cCt"/>
-                        <constraint firstItem="tTc-R2-6nP" firstAttribute="leading" secondItem="aOJ-Su-NEM" secondAttribute="leading" id="BGJ-dN-jHW"/>
-                        <constraint firstItem="tTc-R2-6nP" firstAttribute="top" secondItem="aOJ-Su-NEM" secondAttribute="top" id="uqp-Ld-BhT"/>
-                        <constraint firstAttribute="bottom" secondItem="tTc-R2-6nP" secondAttribute="bottom" id="waY-Ee-42h"/>
+                        <constraint firstAttribute="height" constant="50" id="Bo3-6n-4JT"/>
+                        <constraint firstItem="tTc-R2-6nP" firstAttribute="top" secondItem="aOJ-Su-NEM" secondAttribute="top" id="WAg-Cn-BB6"/>
+                        <constraint firstAttribute="bottom" secondItem="tTc-R2-6nP" secondAttribute="bottom" id="g1V-hw-70O"/>
+                        <constraint firstAttribute="trailing" secondItem="tTc-R2-6nP" secondAttribute="trailing" id="jNv-yR-4G1"/>
+                        <constraint firstItem="tTc-R2-6nP" firstAttribute="leading" secondItem="aOJ-Su-NEM" secondAttribute="leading" id="m1k-LX-ayg"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="SMk-MF-D2x" firstAttribute="leading" secondItem="reM-tD-nfn" secondAttribute="leading" id="44K-fc-DcS"/>
-                <constraint firstAttribute="bottom" secondItem="aOJ-Su-NEM" secondAttribute="bottom" id="4OO-yC-Wqf"/>
-                <constraint firstItem="aOJ-Su-NEM" firstAttribute="leading" secondItem="SMk-MF-D2x" secondAttribute="leading" id="Dgl-4f-NpH"/>
-                <constraint firstItem="SMk-MF-D2x" firstAttribute="top" secondItem="reM-tD-nfn" secondAttribute="top" id="QhI-hY-63o"/>
-                <constraint firstItem="aOJ-Su-NEM" firstAttribute="top" secondItem="SMk-MF-D2x" secondAttribute="bottom" id="b2P-0b-BCq"/>
-                <constraint firstAttribute="bottom" secondItem="SMk-MF-D2x" secondAttribute="bottom" constant="50" id="plG-cb-ATs"/>
-                <constraint firstAttribute="trailing" secondItem="SMk-MF-D2x" secondAttribute="trailing" id="tRW-Xv-NQ9"/>
-                <constraint firstItem="aOJ-Su-NEM" firstAttribute="trailing" secondItem="SMk-MF-D2x" secondAttribute="trailing" id="tuU-gt-94h"/>
+                <constraint firstAttribute="bottom" secondItem="aOJ-Su-NEM" secondAttribute="bottom" id="9QX-w7-H9X"/>
+                <constraint firstItem="aOJ-Su-NEM" firstAttribute="leading" secondItem="reM-tD-nfn" secondAttribute="leading" id="AQn-nJ-EsU"/>
+                <constraint firstItem="SMk-MF-D2x" firstAttribute="leading" secondItem="reM-tD-nfn" secondAttribute="leading" id="HQY-Kf-3aS"/>
+                <constraint firstItem="SMk-MF-D2x" firstAttribute="top" secondItem="reM-tD-nfn" secondAttribute="top" id="Lqh-iq-ytF"/>
+                <constraint firstItem="aOJ-Su-NEM" firstAttribute="top" secondItem="SMk-MF-D2x" secondAttribute="bottom" id="a84-2J-nPO"/>
+                <constraint firstAttribute="trailing" secondItem="SMk-MF-D2x" secondAttribute="trailing" id="gHp-JW-a8J"/>
+                <constraint firstAttribute="trailing" secondItem="aOJ-Su-NEM" secondAttribute="trailing" id="j3V-tF-phr"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <userDefinedRuntimeAttributes>
@@ -52,7 +49,7 @@
                 <outlet property="imageView" destination="SMk-MF-D2x" id="z0t-g3-3av"/>
                 <outlet property="titleLabel" destination="tTc-R2-6nP" id="xCm-GG-qGO"/>
             </connections>
-            <point key="canvasLocation" x="301" y="-14"/>
+            <point key="canvasLocation" x="-47.5" y="-439"/>
         </view>
     </objects>
 </document>

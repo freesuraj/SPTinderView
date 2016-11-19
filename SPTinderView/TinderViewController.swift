@@ -18,7 +18,7 @@ class TinderViewController: UIViewController {
         tinderView.registerNib(UINib(nibName: "MyCustomTinderCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tinderView.dataSource = self
         tinderView.delegate = self
-        tinderView.backgroundColor = UIColor.whiteColor()
+        tinderView.backgroundColor = UIColor.white
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,11 +28,11 @@ class TinderViewController: UIViewController {
 }
 
 extension TinderViewController: SPTinderViewDataSource, SPTinderViewDelegate {
-    func numberOfItemsInTinderView(view: SPTinderView) -> Int {
-        return 20
+    func numberOfItemsInTinderView(_ view: SPTinderView) -> Int {
+        return 100
     }
     
-    func tinderView(view: SPTinderView, cellAt index: Int) -> SPTinderViewCell? {
+    func tinderView(_ view: SPTinderView, cellAt index: Int) -> SPTinderViewCell? {
         if let cell = tinderView.dequeueReusableCellWithIdentifier(cellIdentifier) as? MyCustomTinderCell {
             cell.imageView.image = TinderModel.randomImage()
             cell.titleLabel.text = "Model No: \(index+1)"
@@ -41,7 +41,7 @@ extension TinderViewController: SPTinderViewDataSource, SPTinderViewDelegate {
         return nil
     }
     
-    func tinderView(view: SPTinderView, didMoveCellAt index: Int, towards direction: SPTinderViewCellMovement) {
+    func tinderView(_ view: SPTinderView, didMoveCellAt index: Int, towards direction: SPTinderViewCellMovement) {
         print("\(direction)")
     }
 }
