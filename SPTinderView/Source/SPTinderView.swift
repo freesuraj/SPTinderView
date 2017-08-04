@@ -18,6 +18,7 @@ public protocol SPTinderViewDataSource {
 ///`SPTinderViewDelegate` tells the object conforming it about the actions about the cells in `SPTinderView`
 public protocol SPTinderViewDelegate {
     func tinderView(_ view: SPTinderView, didMoveCellAt index: Int, towards direction: SPTinderViewCellMovement)
+    func tinderView(_ view: SPTinderView, didSelectCellAt index: Int)
 }
 
 /// `SPTinderView` is view that mimics the behavior of shuffling cards of a deck left or right, as seen in the popular dating app *Tinder*.
@@ -86,12 +87,14 @@ public class SPTinderView: UIView {
     fileprivate func insertCell(at index: Int) {
         guard let _dataSource = dataSource , index < numberOfCells else { return }
         if let cell = _dataSource.tinderView(self, cellAt: index) {
-            cell.onCellDidMove = { direction in
-                if direction != .none {
-                    self.animateRemovalForCell(cell, towards: direction, completion:  {
-                        if let _delegate = self.delegate {
-                            _delegate.tinderView(self, didMoveCellAt: index, towards: direction)
-                        }
+            cell.onCellDidMove = { [weak self] direction in
+                guard let weakSelf = self else { return }
+                if direction == .tapped {
+                    weakSelf.delegate?.tinderView(weakSelf, didSelectCellAt: index)
+                }
+                else if direction != .none {
+                    weakSelf.animateRemovalForCell(cell, towards: direction, completion:  {
+                        weakSelf.delegate?.tinderView(weakSelf, didMoveCellAt: index, towards: direction)
                     })
                 }
             }
@@ -112,7 +115,7 @@ public class SPTinderView: UIView {
     fileprivate func animateRemovalForCell(_ cell: SPTinderViewCell, towards direction: SPTinderViewCellMovement, completion:@escaping ()->()) {
         var newPosition = CGPoint.zero
         switch direction {
-        case .none: return
+        case .none, .tapped: return
         case .left: newPosition = CGPoint(x: -2*cell.frame.width, y: cell.center.y)
         case .right: newPosition = CGPoint(x: 2*cell.frame.width, y: cell.center.y)
         case .top: newPosition = CGPoint(x: cell.center.x, y: -2*cell.frame.height)

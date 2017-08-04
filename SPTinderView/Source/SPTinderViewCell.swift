@@ -70,7 +70,7 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
             let deltaY = thisLoc.y - prevLoc.y
             // There's also a little bit of transformation. When the cell is being dragged, it should feel the angle of drag as well
             let xDrift = self.center.x + deltaX - originalCenter.x
-            let rotationAngle = xDrift * -0.05 * CGFloat(M_PI / 90)
+            let rotationAngle = xDrift * -0.05 * CGFloat(Double.pi / 90)
             // Note: Must set the animation option to `AllowUserInteraction` to prevent the main thread being blocked while animation is ongoin
             let rotatedTransfer = CGAffineTransform(rotationAngle: rotationAngle)
             UIView.animate(withDuration: 0.0, delay: 0.0, options: [.allowUserInteraction], animations: {
@@ -102,6 +102,10 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
     }
     
     func setCellMovementDirectionFromDrift(_ xDrift: CGFloat, yDrift: CGFloat){
+        if xDrift == 0, yDrift == 0 {
+            onCellDidMove?(.tapped)
+            return
+        }
         var movement: SPTinderViewCellMovement = .none
         if(xDrift > self.frame.width * scaleToRemoveCell) { movement = .right }
         else if(-xDrift > self.frame.width * scaleToRemoveCell) { movement = .left }
@@ -137,5 +141,6 @@ public enum SPTinderViewCellMovement: Int {
     case left
     case bottom
     case right
+    case tapped
 }
 

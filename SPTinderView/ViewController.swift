@@ -63,6 +63,10 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: SPTinderViewDataSource, SPTinderViewDelegate {
+    func tinderView(_ view: SPTinderView, didSelectCellAt index: Int) {
+        title = "Did select at \(index)"
+    }
+
     func numberOfItemsInTinderView(_ view: SPTinderView) -> Int {
         return cellCount
     }

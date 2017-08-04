@@ -245,7 +245,7 @@
 				TargetAttributes = {
 					ED1F2A111C61D44B0084DD77 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 74HVZ53TRR;
+						DevelopmentTeam = 3PU2FX2MA5;
 						LastSwiftMigration = 0800;
 					};
 					ED1F2A251C61D44B0084DD77 = {
@@ -472,6 +472,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 3PU2FX2MA5;
 				INFOPLIST_FILE = SPTinderView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.suraj.SPTinderView;
@@ -485,6 +486,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 3PU2FX2MA5;
 				INFOPLIST_FILE = SPTinderView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.suraj.SPTinderView;
