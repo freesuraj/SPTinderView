@@ -6,6 +6,7 @@ script:
   - set -o pipefail
   - xcodebuild -version
   - xcodebuild -project SPTinderView.xcodeproj -scheme SPTinderView -destination 'platform=iOS Simulator,name=iPhone 7' build | xcpretty;
+  - echo "3.1" > .swift-version
   - pod lib lint;
 
 branches:
