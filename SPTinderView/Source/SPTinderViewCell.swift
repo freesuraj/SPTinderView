@@ -11,7 +11,7 @@ import UIKit
  /// The SPTinderViewCell defines the attributes and behavior of the cells that appear in SPTinderView objects. This class includes properties and methods for setting and managing cell content and background.
 
 @IBDesignable
-public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
+open class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
     @IBInspectable var reuseIdentifier: String?
     @IBInspectable var cornerRadius: CGFloat = 0 {
         didSet {
@@ -26,7 +26,7 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
     
     fileprivate var originalCenter = CGPoint(x: 0, y: 0)
     fileprivate var scaleToRemoveCell: CGFloat = 0.3
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
     }
@@ -56,12 +56,12 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
         self.layer.masksToBounds = false
     }
     
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let _ = touches.first else { return }
         originalCenter = self.center
     }
     
-    public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let prevLoc = touch.previousLocation(in: self)
             let thisLoc = touch.location(in: self)
@@ -83,13 +83,13 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let xDrift = self.center.x - originalCenter.x
         let yDrift = self.center.y - originalCenter.y
         self.setCellMovementDirectionFromDrift(xDrift, yDrift: yDrift)
     }
     
-    public override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+    open override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         UIView.animate(withDuration: 0.2, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1, options: [.allowUserInteraction], animations: {
             self.center = self.originalCenter
             self.transform = CGAffineTransform.identity
@@ -97,7 +97,7 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
         })
     }
     
-    public override func touchesEstimatedPropertiesUpdated(_ touches: Set<UITouch>) {
+    open override func touchesEstimatedPropertiesUpdated(_ touches: Set<UITouch>) {
        //
     }
     
@@ -135,7 +135,7 @@ public class SPTinderViewCell: UIView, UIGestureRecognizerDelegate {
  - Bottom: When the cell has moved towards bottom
  - Right:  When the cell has moved towards right
  */
-public enum SPTinderViewCellMovement: Int {
+@objc public enum SPTinderViewCellMovement: Int {
     case none
     case top
     case left
