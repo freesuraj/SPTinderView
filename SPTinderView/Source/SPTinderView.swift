@@ -10,31 +10,31 @@ import UIKit
 
 
 /// Protocol that feeds the necessary data for SPTinderView
-public protocol SPTinderViewDataSource {
+@objc public protocol SPTinderViewDataSource: NSObjectProtocol {
     func numberOfItemsInTinderView(_ view: SPTinderView) -> Int
     func tinderView(_ view: SPTinderView, cellAt index: Int) -> SPTinderViewCell?
 }
 
 ///`SPTinderViewDelegate` tells the object conforming it about the actions about the cells in `SPTinderView`
-public protocol SPTinderViewDelegate {
+@objc public protocol SPTinderViewDelegate: NSObjectProtocol {
     func tinderView(_ view: SPTinderView, didMoveCellAt index: Int, towards direction: SPTinderViewCellMovement)
     func tinderView(_ view: SPTinderView, didSelectCellAt index: Int)
 }
 
 /// `SPTinderView` is view that mimics the behavior of shuffling cards of a deck left or right, as seen in the popular dating app *Tinder*.
-public class SPTinderView: UIView {
+open class SPTinderView: UIView {
     
     // Cache
     fileprivate var caches: [SPCache] = []
     
-    public var dataSource: SPTinderViewDataSource? {
+    @IBOutlet open var dataSource: SPTinderViewDataSource? {
         didSet {
             self.reloadData()
         }
     }
     
-    public var delegate: SPTinderViewDelegate?
-    public var currentIndex: Int = 0
+    @IBOutlet open var delegate: SPTinderViewDelegate?
+    open var currentIndex: Int = 0
     fileprivate let visibleCount = 3
     fileprivate var numberOfCells = 0
     
@@ -49,12 +49,13 @@ public class SPTinderView: UIView {
         reloadData()
     }
     
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
         reloadData()
     }
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
+        adjustVisibleCellPosition()
     }
     
     fileprivate func setUpFirstSetOfCells() {
@@ -100,6 +101,7 @@ public class SPTinderView: UIView {
             }
             self.insertSubview(cell, at: 0)
             self.sendSubview(toBack: cell)
+            cell.frame = self.bounds
             cell.center = self.center
         }
     }
@@ -107,6 +109,7 @@ public class SPTinderView: UIView {
     fileprivate func adjustVisibleCellPosition() {        
         UIView.animate(withDuration: 0.3, animations: {
             for (position, cell) in self.visibleCells().enumerated() {
+                cell.frame = self.bounds
                 cell.center.y = self.center.y - CGFloat(position * 5)
             }
         })
@@ -133,7 +136,7 @@ public class SPTinderView: UIView {
         })
     }
     
-    // MARK: Public Method
+    // MARK: open Method
     /**
     Register the Cell class from the provided nib file. The registered cells will be cached which can be retrieved usign ``dequeueReusableCellWithIdentifier: `` method
     
@@ -142,7 +145,7 @@ public class SPTinderView: UIView {
     - parameter nib:        UINib of the cell class of type `SPTinderViewCell`
     - parameter identifier: Identifier that ties the cellClass onto SPTinderView
     */
-    public func registerNib(_ nib: UINib?, forCellReuseIdentifier identifier: String) {
+    open func registerNib(_ nib: UINib?, forCellReuseIdentifier identifier: String) {
         guard let _nib = nib else { return }
         for _ in 0...visibleCount {
             if let cell = _nib.instantiate(withOwner: nil, options: nil).first as? SPTinderViewCell {
@@ -161,7 +164,7 @@ public class SPTinderView: UIView {
      - parameter cellClass:  Cell class that conforms to `SPTinderViewCell`
      - parameter identifier: Identifier that ties the cellClass onto SPTinderView
      */
-    public func registerClass(_ cellClass: AnyClass?, forCellReuseIdentifier identifier: String) {
+    open func registerClass(_ cellClass: AnyClass?, forCellReuseIdentifier identifier: String) {
         if let cell = cellClass as? SPTinderViewCell.Type {
             for _ in 0...visibleCount {
                 registerACell(cell.init(reuseIdentifier: identifier), forIdentifier: identifier)
@@ -176,12 +179,12 @@ public class SPTinderView: UIView {
 
     - returns: `SPTinderViewCell` if cell exists in cache or a nil
      */
-    public func dequeueReusableCellWithIdentifier(_ identifier: String) -> SPTinderViewCell? {
+    open func dequeueReusableCellWithIdentifier(_ identifier: String) -> SPTinderViewCell? {
         let cell = self.getAFreeCellForIdentifier(identifier)
         return cell
     }
     
-    public func reloadData() {
+    open func reloadData() {
         cleanTinderView()
         setUpFirstSetOfCells()
     }
